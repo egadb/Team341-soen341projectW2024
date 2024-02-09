@@ -1,7 +1,23 @@
 # Team341's Car Rental Application!
 
-This project is a car rental application for Customers, Customer Service Representatives and System Administrators. Customers can browse vehicles, start, modify, or cancel reservations, find branches, and provide feedback. CSRs manage check-in and check-out processes, handling reservations and payments. Administrators oversee vehicle and user management, including reservations. This comprehensive system enhances efficiency and user experience in the car rental industry. The application is made with Next.JS.
+This project is a car rental application for:
 
+**1. Customers**
+   - Browse vehicles
+   - Create, modify or cancel reservations
+   - Provide feedback (reviews)
+     
+**2. Customer Service Representatives**
+   - Manage check-in and check-out processes
+   - View existing reservations
+   - Handle reservations and payments
+     
+**3. System Administrators**
+   - Oversee vehicle and user management
+   - View existing accounts/reservations
+   - Create, modify or delete users/vehicles
+
+This comprehensive system enhances efficiency and user experience in the car rental industry. The application is made with Next.JS.
 
 **Team Members**
 
