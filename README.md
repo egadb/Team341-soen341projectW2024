@@ -108,13 +108,18 @@ component libraries, and developer experience.
  4. Integration and Interoperability
  
  4.1 Backend-Frontend Integration
-- Outline the strategy for integrating the chosen backend and
-frontend technologies.
+- Next.js provides a robust platform for building full-stack web applications, offering features and tools to effectively integrate frontend and backend technologies while ensuring   security, performance, and maintainability. Here's some of the strategies that will be used with the help of those features and tools:
+  - API Design: Next.js provides built-in API routes, allowing us to define server-side endpoints directly within our application. We can create API routes using the 
+    'pages/api'directory, making it easy to define backend logic and communicate with the frontend through RESTful or GraphQL APIs.
+  - Folder Structure: Next.js encourages a clear separation of concerns by providing a structured project layout. The '/app' directory mostly contains all the routes, components, and logic for the application. Within this folder, 2 main directories are used to separate the frontend and backend. First, the '/app/ui' directory contains all the UI components for our application, such as tables, forms, buttons, nav-bar, etc. Secondly, the '/app/lib' directory contains functions used in our application, such as reusable utility functions and data fetching functions as well as the type definition of our data and how they should be accepted and stored.
+  - Use of Frameworks and Libraries: Next.js is a React framework that provides many features out of the box, such as server-side rendering, static site generation, and API routes. It integrates seamlessly with other popular libraries and frameworks, allowing us to leverage the vast ecosystem of React and Node.js libraries for both frontend and backend development.
+  - Data Storage: Hosting our Next.js application on Vercel will allow us to deplay and store directly our web app on a serverless database called Vercel Postgres.
  
  4.2 Third-Party Services
-- Identify any third-party services or APIs that will be
-integrated into the project.
- 
+- In this project, two third-party APIs will play a crucial role:
+  - Firstly, we'll integrate a Car API to populate our application with a comprehensive catalog of rental vehicles. By leveraging this API, we can effortlessly access a wealth of information about available cars, ensuring that our users have access to a diverse selection of vehicles for their rental needs. This integration will streamline the process of displaying vehicle details such as the model, type, price range, etc in a user-friendly format, enhancing the overall browsing experience.
+  - Secondly, we'll implement Google's Map API to enhance the user interface by providing a visual representation of key locations such as rental pickup points, branch locations, and nearby Airports. By integrating this API, we can dynamically generate interactive maps that offer users valuable context and help them navigate their rental experience more efficiently. This visual component will significantly improve user engagement and satisfaction, contributing to the overall success of the application.
+
  5. Security Considerations
  
 - Provide an overview of security measures and considerations for
