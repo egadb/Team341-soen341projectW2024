@@ -17,7 +17,7 @@ This project is a car rental application for:
    - View existing accounts/reservations
    - Create, modify or delete users/vehicles
 
-This comprehensive system enhances efficiency and user experience in the car rental industry. The application is made with Next.JS.
+This comprehensive system enhances efficiency and user experience in the car rental industry. The application is made with Next.JS and MongoDB.
 
 **Team Members**
 
