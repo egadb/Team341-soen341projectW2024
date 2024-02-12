@@ -59,10 +59,13 @@ Here is a list of steps to take to run the project.
 
    This project uses standard version control practices. Contributors must create separate branches from main, relating to an already created Issue, work on their contribution, and submit detailed pull requests to merge their code. 
 
-   
-   Here are some PR and branch guidelines:
+   Here are some branch guidelines:
 
    - Make sure the branch you are working on is named after the Issue # and the title of the Issue for clarity.
+   - If there is a branch already created for the Issue you are working on, make sure to work on that branch. Make sure no one else is working on that branch to avoid conflicts. This is most applicable to updates you may want to make to an already approved PR, or a PR that is yet to be approved.
+
+   Here are some PR guidelines:
+
    - Must fix any merge conflicts before submitting a PR.
    - Title: Should mention the Issue # as well as the title of the Issue for clarity.
    - Description: Should mention all significant changes, expected behavior of those changes, and how to test the changes.
