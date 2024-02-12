@@ -61,6 +61,7 @@ Here is a list of steps to take to run the project.
    
    Here are some PR guidelines:
 
+   - Make sure the branch you are working on is named after the Issue # and the title of the Issue for clarity.
    - Must fix any merge conflicts before submitting a PR.
    - Title: Should mention the Issue # as well as the title of the Issue for clarity.
    - Description: Should mention all significant changes, expected behavior of those changes, and how to test the changes.
