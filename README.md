@@ -61,9 +61,10 @@ Here is a list of steps to take to run the project.
    
    Here are some PR guidelines:
 
-   -Must fix any merge conflicts before submitting a PR.
-   -Title: Should mention the Issue # as well as the title of the Issue for clarity.
-   -Description: Should mention all significant changes, expected behavior of those changes, and how to test the changes.
+   - Must fix any merge conflicts before submitting a PR.
+   - Title: Should mention the Issue # as well as the title of the Issue for clarity.
+   - Description: Should mention all significant changes, expected behavior of those changes, and how to test the changes.
+
 
    PRs must be approved by 2 different team members. Members should only approve PRs after they have thoroughly tested the changes made in the PR.
 
