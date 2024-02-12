@@ -30,9 +30,14 @@ This comprehensive system enhances efficiency and user experience in the car ren
 - David Cohen: Full Stack Developer, 40130406
 - Harun Slahaldin Omar: Full Stack Developer, 40250981
 
+## Built With
+
+- [Next.js](https://nextjs.org/)
+- [React](https://react.dev/)
+- [MongoDB](https://www.mongodb.com/)
+
 ## Usage Guidelines/Getting Started
 
-This project uses Next.js. [Here is a short guide for it.](https://nextjs.org/learn)
 
 Here is a list of steps to take to run the project.
    - [Install Git](https://git-scm.com/downloads)
