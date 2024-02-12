@@ -57,9 +57,10 @@ Here is a list of steps to take to run the project.
 
    ## Git Rules
 
-   This project uses standard version control practices. Contributors must create separate branches from main, relating to an already crated Issue, work on their contribution, and submit detailed pull requests to merge their code. 
+   This project uses standard version control practices. Contributors must create separate branches from main, relating to an already created Issue, work on their contribution, and submit detailed pull requests to merge their code. 
+
    
-   Here are some PR guidelines:
+   Here are some PR and branch guidelines:
 
    - Make sure the branch you are working on is named after the Issue # and the title of the Issue for clarity.
    - Must fix any merge conflicts before submitting a PR.
