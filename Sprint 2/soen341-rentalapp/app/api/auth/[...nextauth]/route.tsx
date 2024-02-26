@@ -4,6 +4,13 @@ import bcrypt from "bcryptjs";
 import NextAuth, { Account, User as AuthUser, NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
+declare module "next-auth" {
+  interface User {
+    /** The user's role */
+    role: string;
+  }
+}
+
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
@@ -17,7 +24,6 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
-
       async authorize(credentials: any) {
         await connectMongoDB();
         try {
@@ -35,6 +41,24 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    session({ session, token, user }) {
+      // session.user.address is now a valid property, and will be type-checked
+      // in places like `useSession().data.user` or `auth().user`
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          role: token.role,
+        },
+      };
+    },
+    async jwt({ token, session, user }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      if (user) {
+        token.role = user.role;
+      }
+      return token;
+    },
     async signIn({ user, account }: { user: AuthUser; account: Account | null }) {
       return true;
     },
