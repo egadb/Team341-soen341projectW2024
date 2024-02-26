@@ -3,7 +3,7 @@ import spinner from "@/public/icons/spinner.svg";
 import Image from "next/image";
 import { useFormStatus } from "react-dom";
 
-export default function Provider() {
+export default function Spinner() {
   const { pending } = useFormStatus();
 
   return (

@@ -1,6 +1,6 @@
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
-import CreateUser from "@/lib/actions/createUser";
+import { registerUser } from "@/lib/actions/usersActions";
 import Link from "next/link";
 
 export default function RegisterForm() {
@@ -8,7 +8,7 @@ export default function RegisterForm() {
     <div className="grid h-screen place-items-center">
       <div className="rounded-lg border-t-4 border-green-400 bg-white p-5 shadow-lg">
         <h1 className="my-4 text-xl font-bold">Register</h1>
-        <Provider formAction={CreateUser}>
+        <Provider formAction={registerUser}>
           <Spinner />
           <input
             type="text"
