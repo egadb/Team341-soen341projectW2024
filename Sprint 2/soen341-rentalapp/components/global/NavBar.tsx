@@ -19,7 +19,16 @@ function NavBarButton({ name, path }: NavBarButtonProps) {
 
 export default function NavBar() {
   return (
-    <div className="flex " style={{ backgroundColor: "#1a202c", width: "100%" }}>
+    <div
+      className="flex"
+      style={{
+        backgroundColor: "#1a202c",
+        width: "100%",
+        position: "fixed",
+        top: 0,
+        overflowY: "auto",
+      }}
+    >
       <nav className="flex items-center py-4">
         <Link href="/browse-vehicles">
           <h1 className="cursor-pointer p-4 text-2xl font-bold">Car Rental</h1>
