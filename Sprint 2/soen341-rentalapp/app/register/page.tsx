@@ -1,14 +1,11 @@
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
-import Footer from "@/components/global/Footer";
-import NavBar from "@/components/global/NavBar";
 import CreateUser from "@/lib/actions/createUser";
 import Link from "next/link";
 
 export default function RegisterForm() {
   return (
     <div>
-      <NavBar />
       <div className="grid h-screen place-items-center">
         <div className="rounded-lg border-t-4 border-green-400 bg-white p-5 shadow-lg">
           <h1 className="my-4 text-xl font-bold">Register</h1>
@@ -54,7 +51,6 @@ export default function RegisterForm() {
           </Link>
         </div>
       </div>
-      <Footer />
     </div>
   );
 }
