@@ -10,13 +10,13 @@ export default function RootLayout({
     <div className="flex h-[100vh] w-full flex-row">
       <div className="flex h-full w-[20%] flex-col items-center bg-white">
         <h1 className="p-3 text-xl font-bold">Welcome to the admin dashboard!</h1>
-        <Link className="w-full border-t-4 p-3 text-center text-lg" href="/users">
+        <Link className="w-full border-t-4 p-3 text-center text-lg" href="/admin/users">
           Users CRUD
         </Link>
-        <Link className="w-full border-t-4 p-3 text-center text-lg" href="/reservations">
+        <Link className="w-full border-t-4 p-3 text-center text-lg" href="/admin/reservations">
           Reservations CRUD
         </Link>
-        <Link className="w-full border-t-4 p-3 text-center text-lg" href="/vehicles">
+        <Link className="w-full border-t-4 p-3 text-center text-lg" href="/admin/vehicles">
           Vechicles CRUD
         </Link>
       </div>
