@@ -15,8 +15,8 @@ export default function ReservationForm() {
     // Handle form submission here
   };
   return (
-    <div className="grid h-screen ">
-      <div className="h-full rounded-lg bg-red-800 p-5 shadow-lg">
+    <div className="h-screen">
+      <div className="h-full rounded-lg bg-red-800 p-5 shadow-lg" style={{ marginTop: "75px" }}>
         <h1 className="my-4 text-xl font-bold">Reservation</h1>
         <form onSubmit={handleSubmit} className="h-full">
           <input
