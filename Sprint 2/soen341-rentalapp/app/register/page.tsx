@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default function RegisterForm() {
   return (
+
     <div className="grid h-screen place-items-center">
       <div className="rounded-lg border-t-4 border-green-400 bg-white p-5 shadow-lg">
         <h1 className="my-4 text-xl font-bold">Register</h1>
