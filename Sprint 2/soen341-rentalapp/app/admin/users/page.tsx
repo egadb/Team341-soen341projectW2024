@@ -1,11 +1,18 @@
 import Features from "@/components/admin/Features";
 import FormWrapper from "@/components/admin/FormWrapper";
+import Pagination from "@/components/admin/Pagination";
 import TableRow from "@/components/table/row";
 import { createUser, getAllUsers, updateUser } from "@/lib/actions/usersActions";
 import User from "@/models/user";
 
-export default async function UsersCrud() {
-  const { users } = await getAllUsers();
+export default async function UsersCrud({
+  params,
+  searchParams,
+}: {
+  params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+}) {
+  const { users, count, totalPage } = await getAllUsers(searchParams);
   let newUser = new User();
   const newUserJSON = {
     _id: newUser._id.toString(),
@@ -34,6 +41,7 @@ export default async function UsersCrud() {
           <TableRow item={user}></TableRow>
         ))}
       </div>
+      {totalPage && <Pagination totalPage={totalPage} />}
     </div>
   );
 }

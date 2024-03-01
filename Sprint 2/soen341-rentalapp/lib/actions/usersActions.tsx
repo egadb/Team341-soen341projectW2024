@@ -127,10 +127,36 @@ export async function updateUser(prevState: any, formData: FormData) {
   }
 }
 
-export async function getAllUsers() {
+export async function getAllUsers(searchParams: { [key: string]: string | string[] | undefined }) {
   await connectMongoDB();
+
+  const search = searchParams.search || "";
+  const sort = searchParams.search || "createdAt";
+  const limit = searchParams.limit * 1 || 12;
+  const page = searchParams.page * 1 || 1;
+  const skip = searchParams.skip * 1 || limit * (page - 1);
+
   try {
-    const users = await User.find();
+    const users = await User.find({
+      $or: [
+        { lastName: { $regex: search, $options: "i" } },
+        { firstName: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+      ],
+    })
+      .sort(sort)
+      .limit(limit)
+      .skip(skip);
+
+    const count = await User.find({
+      $or: [
+        { lastName: { $regex: search, $options: "i" } },
+        { firstName: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+      ],
+    }).count();
+
+    const totalPage = Math.ceil(count / limit);
     const userArray = users.map((user) => ({
       _id: user._id.toString(),
       firstName: user.firstName,
@@ -138,7 +164,7 @@ export async function getAllUsers() {
       email: user.email,
       role: user.role,
     }));
-    return { users: userArray };
+    return { users: userArray, count, totalPage };
   } catch (err: any) {
     throw new Error("Failed to get users");
   }

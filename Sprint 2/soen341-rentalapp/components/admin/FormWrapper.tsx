@@ -18,6 +18,7 @@ export default function FormWrapper(updateAction: any, createAction: any) {
                 name={key}
                 placeholder={key}
                 defaultValue={value as string}
+                key={key}
                 readOnly={key == "_id"}
               />
             ))}

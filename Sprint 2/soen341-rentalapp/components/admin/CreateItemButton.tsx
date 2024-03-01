@@ -7,7 +7,7 @@ export default function CreateItemButton(params: any) {
   const name = usePathname().split("/");
   return (
     <button
-      onClick={() => setCreateItem(params.newItem)}
+      onClick={() => setCreateItem(params.newItemModel)}
       className="max-w-[20%] cursor-pointer rounded-lg bg-green-600 px-6 py-2 font-bold text-white"
     >
       Create new {name[2].slice(0, -1)}
