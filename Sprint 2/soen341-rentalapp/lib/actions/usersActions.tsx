@@ -142,6 +142,7 @@ export async function getAllUsers(searchParams: { [key: string]: string | string
         { lastName: { $regex: search, $options: "i" } },
         { firstName: { $regex: search, $options: "i" } },
         { email: { $regex: search, $options: "i" } },
+        { role: { $regex: search, $options: "i" } },
       ],
     })
       .sort(sort)
