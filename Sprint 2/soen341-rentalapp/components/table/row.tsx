@@ -22,7 +22,7 @@ export default function TableRow(item: any) {
         <h1>{item?.email}</h1>
         <h1>{item?.role}</h1>
       </div>
-      <div className="mr-12 flex flex-row gap-4">
+      <div className="flex flex-row gap-4">
         <button
           onClick={() => setEditItem(item)}
           className="cursor-pointer rounded-lg bg-blue-600 px-2 py-2 font-bold text-white"

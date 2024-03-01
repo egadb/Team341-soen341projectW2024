@@ -1,4 +1,4 @@
-import CreateItemButton from "@/components/admin/CreateItemButton";
+import Features from "@/components/admin/Features";
 import FormWrapper from "@/components/admin/FormWrapper";
 import TableRow from "@/components/table/row";
 import { createUser, getAllUsers, updateUser } from "@/lib/actions/usersActions";
@@ -19,14 +19,14 @@ export default async function UsersCrud() {
     <div className="w-[80%]">
       <FormWrapper updateAction={updateUser} createAction={createUser}></FormWrapper>
       <div className="flex w-full flex-col rounded-lg p-12">
-        <CreateItemButton newItem={newUserJSON} />
+        <Features newItemModel={newUserJSON} />
         <div className="flex flex-row place-content-between items-center rounded-t-lg border-x-2 border-t-2 bg-white p-2">
           <div className="ml-24 flex flex-row gap-32">
             <h1>Name</h1>
             <h1>Email</h1>
             <h1>Role</h1>
           </div>
-          <div className="mr-12 flex flex-row gap-4">
+          <div className="mr-10 flex flex-row gap-4">
             <h1>Actions</h1>
           </div>
         </div>
