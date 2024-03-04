@@ -16,16 +16,14 @@ export default function TableRow(item: any) {
   }
 
   return (
-    <div className="flex flex-row place-content-between items-center border-2 bg-white p-2">
-      <div className="ml-24 flex flex-row gap-12">
-        <h1>{item?.firstName + " " + item?.lastName}</h1>
-        <h1>{item?.email}</h1>
-        <h1>{item?.role}</h1>
-      </div>
-      <div className="flex flex-row gap-4">
+    <tr className="border-2 py-3">
+      <td>{item?.firstName + " " + item?.lastName}</td>
+      <td>{item?.email}</td>
+      <td className="text-center">{item?.role}</td>
+      <td className="text-center">
         <button
           onClick={() => setEditItem(item)}
-          className="cursor-pointer rounded-lg bg-blue-600 px-2 py-2 font-bold text-white"
+          className="m-1 cursor-pointer rounded-lg bg-blue-600 px-2 py-2 font-bold text-white"
         >
           Edit
         </button>
@@ -35,7 +33,7 @@ export default function TableRow(item: any) {
         >
           {isPending ? "Loading..." : "Delete"}
         </button>
-      </div>
-    </div>
+      </td>
+    </tr>
   );
 }

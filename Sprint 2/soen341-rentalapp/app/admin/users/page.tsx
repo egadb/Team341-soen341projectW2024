@@ -25,21 +25,23 @@ export default async function UsersCrud({
   return (
     <div className="w-[80%]">
       <FormWrapper updateAction={updateUser} createAction={createUser}></FormWrapper>
-      <div className="flex w-full flex-col rounded-lg p-12">
+      <div className="flex w-full flex-col rounded-lg px-12 py-4">
         <Features newItemModel={newUserJSON} />
-        <div className="flex flex-row place-content-between items-center rounded-t-lg border-x-2 border-t-2 bg-white p-2">
-          <div className="ml-24 flex flex-row gap-32">
-            <h1>Name</h1>
-            <h1>Email</h1>
-            <h1>Role</h1>
-          </div>
-          <div className="mr-10 flex flex-row gap-4">
-            <h1>Actions</h1>
-          </div>
-        </div>
-        {users.map((user) => (
-          <TableRow item={user}></TableRow>
-        ))}
+        <table className="table-auto rounded-xl border bg-white">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => (
+              <TableRow key={user._id} item={user}></TableRow>
+            ))}
+          </tbody>
+        </table>
       </div>
       {totalPage && <Pagination totalPage={totalPage} />}
     </div>
