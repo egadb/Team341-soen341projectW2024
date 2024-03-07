@@ -17,9 +17,9 @@ export default function TableRow(item: any) {
 
   return (
     <tr className="border-2 py-3">
-      <td>{item?.firstName + " " + item?.lastName}</td>
-      <td>{item?.email}</td>
-      <td className="text-center">{item?.role}</td>
+      {Object.entries(item).map(
+        ([key, value]) => key !== "password" && key !== "_id" && <td>{value as String}</td>
+      )}
       <td className="text-center">
         <button
           onClick={() => setEditItem(item)}
