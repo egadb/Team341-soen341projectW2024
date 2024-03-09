@@ -40,6 +40,33 @@ export async function createVehicle(prevState: any, formData: FormData) {
         }
     }
 
+    export async function updateVehicle(prevState: any, formData: FormData) {
+        const isValid = !!(
+          formData.get("_id") &&
+          formData.get("model") &&
+          formData.get("type") &&
+          formData.get("category") &&
+          formData.get("price") &&
+          formData.get("pictureURL")
+        );
+      
+        if (isValid) {
+          await connectMongoDB();
+          const _id = formData.get("_id")?.toString();
+          const model = formData.get("model")?.toString();
+          const type = formData.get("type")?.toString();
+          const category = formData.get("category")?.toString();
+          const price = parseFloat(formData.get("price")?.toString() || "0");
+          const pictureURL = formData.get("pictureURL")?.toString();
+      
+          try {
+            await Vehicle.findByIdAndUpdate(_id, { model, type, category, price, pictureURL });
+          } catch (err: any) {
+            throw new Error("Failed to update vehicle");
+          }
+        }
+      }
+    
     export async function getAllVehicles(searchParams: { [key: string]: string | string[] | undefined }) {
         await connectMongoDB();
       
