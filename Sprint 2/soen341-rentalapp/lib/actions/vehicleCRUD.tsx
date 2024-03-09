@@ -66,7 +66,17 @@ export async function createVehicle(prevState: any, formData: FormData) {
           }
         }
       }
-    
+
+      export async function deleteVehicle(_id: any) {
+        await connectMongoDB();
+        try {
+          await Vehicle.findByIdAndDelete(_id);
+          revalidatePath("/");
+          return;
+        } catch (err: any) {
+          throw new Error("Failed to delete vehicle");
+        }
+      }
     export async function getAllVehicles(searchParams: { [key: string]: string | string[] | undefined }) {
         await connectMongoDB();
       
