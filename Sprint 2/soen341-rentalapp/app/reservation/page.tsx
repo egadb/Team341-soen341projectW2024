@@ -11,7 +11,6 @@ export default function ReservationForm() {
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [additionalFeatures, setAdditionalFeatures] = useState<string[]>([]);
-
   const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = event.target;
     switch (name) {
