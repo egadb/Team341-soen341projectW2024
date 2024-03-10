@@ -30,7 +30,8 @@ export default async function UsersCrud({
         <table className="table-auto rounded-xl border bg-white">
           <thead>
             <tr>
-              <th>Name</th>
+              <th>FirstName</th>
+              <th>LastName</th>
               <th>Email</th>
               <th>Role</th>
               <th>Actions</th>
