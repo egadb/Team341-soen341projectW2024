@@ -86,8 +86,9 @@ export default function ReservationForm() {
       priceRange: priceRange,
       additionalFeatures: additionalFeatures
     }
-    router.push(`/reservationPage?typeVehicle=${typeVehicle}&category=${category}&priceRange=${priceRange}`)
     console.log(data)
+    router.push(`/reservationPage?typeVehicle=${typeVehicle}&category=${category}&priceRange=${priceRange}`)
+
   };
 
   return (

@@ -45,7 +45,7 @@ export default async function VehiclesCrud({
           </tbody>
         </table>
       </div>
-      {totalPages && <Pagination totalPages={totalPages} />}
+      {totalPages && <Pagination totalPage={totalPages} />}
     </div>
   );
 }
