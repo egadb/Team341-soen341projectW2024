@@ -2,16 +2,21 @@
 
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
+import { redirect, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { ChangeEvent, useState } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function ReservationForm() {
   const [location, setLocation] = useState("");
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
+  const [typeVehicle, setTypeVehicle] = useState("");
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [additionalFeatures, setAdditionalFeatures] = useState<string[]>([]);
-
+  const router = useRouter();
+  
   const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = event.target;
     switch (name) {
@@ -23,6 +28,9 @@ export default function ReservationForm() {
         break;
       case "returnDate":
         setReturnDate(value);
+        break;
+      case "typeVehicle":
+        setTypeVehicle(value);
         break;
       case "category":
         setCategory(value);
@@ -47,32 +55,45 @@ export default function ReservationForm() {
     const newLocation = formData.get("location") as string;
     const newPickupDate = formData.get("pickupDate") as string;
     const newReturnDate = formData.get("returnDate") as string;
+    const newType = formData.get("typeVehicle") as string;
     const newCategory = formData.get("category") as string;
     const newPriceRange = formData.get("priceRange") as string;
 
     setLocation(newLocation);
     setPickupDate(newPickupDate);
     setReturnDate(newReturnDate);
+    setTypeVehicle(newType);
     setCategory(newCategory);
     setPriceRange(newPriceRange);
 
     // console.log(location);
     // console.log(pickupDate);
     // console.log(returnDate);
+    // console.log(typeVehicle);
     // console.log(category);
     // console.log(priceRange);
     // for (let feature of additionalFeatures) {
     //   console.log(feature);
-
+    // } 
     //make it go to the next page that displays cars now
-
-    // }
+    
+    const data = {
+      location: location,
+      pickupDate: pickupDate,
+      returnDate: returnDate,
+      typeVehicle: typeVehicle,
+      category: category,
+      priceRange: priceRange,
+      additionalFeatures: additionalFeatures
+    }
+    router.push(`/reservationPage?typeVehicle=${typeVehicle}&category=${category}&priceRange=${priceRange}`)
+    console.log(data)
   };
 
   return (
     <div className="grid h-screen place-items-center">
       <div className="rounded-lg border-t-4 border-green-400 bg-white p-5 shadow-lg">
-        <h1 className="my-4 text-xl font-bold">Register</h1>
+        <h1 className="my-4 text-xl font-bold">Reservation</h1>
         <Provider formAction={handleSubmit}>
           <Spinner />
           <select
@@ -108,6 +129,21 @@ export default function ReservationForm() {
             onChange={handleChange}
           />
           <select
+            id="typeDropdown"
+            className="rounded-md border-2 text-gray-400"
+            name={"typeVehicle"}
+            required
+            onChange={handleChange}
+          >
+            <option value="" disabled selected>
+              Select a Type
+            </option>
+            <option value="Car">Car</option>
+            <option value="Suv">SUV</option>
+            <option value="Van">Van</option>
+            <option value="Truck">Truck</option>
+          </select>
+          <select
             id="categoryDropdown"
             className="rounded-md border-2 text-gray-400"
             name={"category"}
@@ -117,10 +153,9 @@ export default function ReservationForm() {
             <option value="" disabled selected>
               Select a Category
             </option>
-            <option value="sedan">Sedan</option>
-            <option value="suv">SUV</option>
-            <option value="pickup">Pickup</option>
-            <option value="hatchback">Hatchback</option>
+            <option value="Compact">Compact</option>
+            <option value="Standard">Standard</option>
+            <option value="Intermediate">Intermediate</option>
           </select>
           <select
             id="priceDropdown"
@@ -186,6 +221,7 @@ export default function ReservationForm() {
             Submit
           </button>
         </Provider>
+        <Link href={"/reservationPage"}>Go Reservation Page</Link>
       </div>
     </div>
   );
