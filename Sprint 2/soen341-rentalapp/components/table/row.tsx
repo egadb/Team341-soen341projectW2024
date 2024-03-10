@@ -3,6 +3,7 @@
 import { deleteUser } from "@/lib/actions/usersActions";
 import { useTransition } from "react";
 import { useEditItemContext } from "../admin/Provider";
+import { deleteVehicle } from "@/lib/actions/vehicleCRUD";
 
 export default function TableRow(item: any) {
   let [isPending, startTransition] = useTransition();
@@ -10,16 +11,23 @@ export default function TableRow(item: any) {
   item = item.item;
 
   async function handleDelete(_id: any) {
-    if (window.confirm("Are you sure you want to delete this user?")) {
-      await deleteUser(_id);
+    const currentPath = window.location.pathname;
+    if (currentPath.includes('/vehicles')) {
+      if (window.confirm("Are you sure you want to delete this vehicle?")) {
+        await deleteVehicle(_id);
+      }
+    } else if (currentPath.includes('/users')) {
+      if (window.confirm("Are you sure you want to delete this user?")) {
+        await deleteUser(_id);
+      }
     }
   }
 
   return (
     <tr className="border-2 py-3">
-      <td>{item?.firstName + " " + item?.lastName}</td>
-      <td>{item?.email}</td>
-      <td className="text-center">{item?.role}</td>
+      {Object.entries(item).map(
+        ([key, value]) => key !== "password" && key !== "_id" && <td>{value as String}</td>
+      )}
       <td className="text-center">
         <button
           onClick={() => setEditItem(item)}
@@ -37,3 +45,4 @@ export default function TableRow(item: any) {
     </tr>
   );
 }
+
