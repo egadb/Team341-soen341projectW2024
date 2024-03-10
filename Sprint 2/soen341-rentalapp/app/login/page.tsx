@@ -37,7 +37,7 @@ export default async function LoginForm() {
             </button>
           </Provider>
           <Link className="mt-3 text-right text-sm" href={"/register"}>
-            Don't have an account? <span className="underline">Register</span>
+            {`Don't have an account?`} <span className="underline">Register</span>
           </Link>
         </div>
       </div>
