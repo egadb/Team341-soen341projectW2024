@@ -27,8 +27,8 @@ jobs:
         name: Install pnpm
         id: pnpm-install
         with:
-          version: 7
-          run_install: false
+          version: 6
+          run_install: true
 
       - name: Install dependencies
         working-directory: ./Sprint 2/soen341-rentalapp
