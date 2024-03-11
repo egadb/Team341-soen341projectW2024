@@ -4,7 +4,6 @@ import { deleteUser } from "@/lib/actions/usersActions";
 import { deleteVehicle } from "@/lib/actions/vehicleCRUD";
 import { useTransition } from "react";
 import { useEditItemContext } from "../admin/Provider";
-import { deleteVehicle } from "@/lib/actions/vehicleCRUD";
 import { deleteReservation } from "@/lib/actions/reservationActions";
 
 export default function TableRow(item: any) {
