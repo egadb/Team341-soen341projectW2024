@@ -1,6 +1,7 @@
 "use client";
 
 import { deleteUser } from "@/lib/actions/usersActions";
+import { deleteVehicle } from "@/lib/actions/vehicleCRUD";
 import { useTransition } from "react";
 import { useEditItemContext } from "../admin/Provider";
 import { deleteVehicle } from "@/lib/actions/vehicleCRUD";
@@ -13,11 +14,11 @@ export default function TableRow(item: any) {
 
   async function handleDelete(_id: any) {
     const currentPath = window.location.pathname;
-    if (currentPath.includes('/vehicles')) {
+    if (currentPath.includes("/vehicles")) {
       if (window.confirm("Are you sure you want to delete this vehicle?")) {
         await deleteVehicle(_id);
       }
-    } else if (currentPath.includes('/users')) {
+    } else if (currentPath.includes("/users")) {
       if (window.confirm("Are you sure you want to delete this user?")) {
         await deleteUser(_id);
       }
@@ -31,7 +32,8 @@ export default function TableRow(item: any) {
   return (
     <tr className="border-2 py-3">
       {Object.entries(item).map(
-        ([key, value]) => key !== "password" && key !== "_id" && <td>{value as String}</td>
+        ([key, value]) =>
+          key !== "password" && key !== "_id" && <td key={key}>{value as String}</td>
       )}
       <td className="text-center">
         <button
@@ -50,4 +52,3 @@ export default function TableRow(item: any) {
     </tr>
   );
 }
-
