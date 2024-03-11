@@ -10,7 +10,7 @@ export default async function UsersCrud({
   searchParams,
 }: {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) {
   const { users, count, totalPage } = await getAllUsers(searchParams);
   let newUser = new User();

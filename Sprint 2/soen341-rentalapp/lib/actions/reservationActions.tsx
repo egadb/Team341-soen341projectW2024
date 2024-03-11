@@ -95,14 +95,14 @@ export async function getAllReservations(searchParams: { [key: string]: string |
       .limit(limit)
       .skip(skip);
 
-    const count = await Reservation.find({
+    const count = await Reservation.countDocuments({
       $or: [
         { userID: { $regex: search, $options: "i" } },
         { vehicleID: { $regex: search, $options: "i" } },
         { pickupDate: { $regex: search, $options: "i" } },
         { endDate: { $regex: search, $options: "i" } },
       ],
-    }).count();
+    });
 
     const totalPage = Math.ceil(count / limit);
     const reservationArray = reservations.map((reservation) => ({

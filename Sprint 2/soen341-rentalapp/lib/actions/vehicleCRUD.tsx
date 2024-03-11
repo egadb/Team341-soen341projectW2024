@@ -98,13 +98,13 @@ export async function createVehicle(prevState: any, formData: FormData) {
             .limit(limit)
             .skip(skip);
       
-          const count = await Vehicle.find({
+          const count = await Vehicle.countDocuments({
             $or: [
               { model: { $regex: search, $options: "i" } },
               { type: { $regex: search, $options: "i" } },
               { category: { $regex: search, $options: "i" } },
             ],
-          }).count();
+          });
       
           const totalPages = Math.ceil(count / limit);
           const vehicleArray = vehicles.map((vehicle) => ({

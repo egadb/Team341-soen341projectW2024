@@ -149,13 +149,13 @@ export async function getAllUsers(searchParams: { [key: string]: string | undefi
       .limit(limit)
       .skip(skip);
 
-    const count = await User.find({
+    const count = await User.countDocuments({
       $or: [
         { lastName: { $regex: search, $options: "i" } },
         { firstName: { $regex: search, $options: "i" } },
         { email: { $regex: search, $options: "i" } },
       ],
-    }).count();
+    });
 
     const totalPage = Math.ceil(count / limit);
     const userArray = users.map((user) => ({

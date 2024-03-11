@@ -2,7 +2,11 @@ import Features from "@/components/admin/Features";
 import FormWrapper from "@/components/admin/FormWrapper";
 import Pagination from "@/components/admin/Pagination";
 import TableRow from "@/components/table/row";
-import { createReservation, getAllReservations, updateReservation } from "@/lib/actions/reservationActions";
+import {
+  createReservation,
+  getAllReservations,
+  updateReservation,
+} from "@/lib/actions/reservationActions";
 import Reservation from "@/models/reservation";
 
 export default async function ReservationsCrud({
@@ -10,7 +14,7 @@ export default async function ReservationsCrud({
   searchParams,
 }: {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) {
   const { reservations, count, totalPage } = await getAllReservations(searchParams);
   const newReservation = new Reservation();
