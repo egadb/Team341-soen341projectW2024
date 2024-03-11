@@ -3,7 +3,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 const useCustomRouter = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const query = {};
+  const query: any = {};
 
   let search = searchParams.get("search");
   let sort = searchParams.get("sort");
