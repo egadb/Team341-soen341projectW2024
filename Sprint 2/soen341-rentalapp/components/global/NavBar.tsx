@@ -24,14 +24,13 @@ export default function NavBar() {
       style={{
         backgroundColor: "#1a202c",
         width: "100%",
-        position: "fixed",
         top: 0,
         overflowY: "auto",
       }}
     >
       <nav className="flex items-center py-4">
-        <Link href="/browse-vehicles">
-          <h1 className="cursor-pointer p-4 text-2xl font-bold">Car Rental</h1>
+        <Link href="/">
+          <h1 className="cursor-pointer p-4 text-2xl font-bold text-white">Car Rental</h1>
         </Link>
         <NavBarButton name="Login" path="/login" />
         <NavBarButton name="Register" path="/register" />
