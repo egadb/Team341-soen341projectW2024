@@ -34,7 +34,6 @@ export default function NavBar() {
         </Link>
         <NavBarButton name="Login" path="/login" />
         <NavBarButton name="Register" path="/register" />
-        <NavBarButton name="Browse Vehicles" path="/browse-vehicles" />
         <NavBarButton name="Reserve" path="/reservation" />
       </nav>
     </div>
