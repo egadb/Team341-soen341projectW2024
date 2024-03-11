@@ -127,14 +127,14 @@ export async function updateUser(prevState: any, formData: FormData) {
   }
 }
 
-export async function getAllUsers(searchParams: { [key: string]: string | string[] | undefined }) {
+export async function getAllUsers(searchParams: { [key: string]: string | undefined }) {
   await connectMongoDB();
 
   const search = searchParams.search || "";
-  const sort = searchParams.search || "createdAt";
-  const limit = searchParams.limit * 1 || 12;
-  const page = searchParams.page * 1 || 1;
-  const skip = searchParams.skip * 1 || limit * (page - 1);
+  const sort = searchParams.sort || "createdAt";
+  const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 12;
+  const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
+  const skip = limit * (page - 1);
 
   try {
     const users = await User.find({
@@ -149,13 +149,13 @@ export async function getAllUsers(searchParams: { [key: string]: string | string
       .limit(limit)
       .skip(skip);
 
-    const count = await User.find({
+    const count = await User.countDocuments({
       $or: [
         { lastName: { $regex: search, $options: "i" } },
         { firstName: { $regex: search, $options: "i" } },
         { email: { $regex: search, $options: "i" } },
       ],
-    }).count();
+    });
 
     const totalPage = Math.ceil(count / limit);
     const userArray = users.map((user) => ({

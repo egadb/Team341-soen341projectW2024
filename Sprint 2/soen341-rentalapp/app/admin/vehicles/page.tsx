@@ -10,7 +10,7 @@ export default async function VehiclesCrud({
   searchParams,
 }: {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: { [key: string]: string | undefined };
 }) {
   const { vehicles, count, totalPages } = await getAllVehicles(searchParams);
   const newVehicle = new Vehicle();
@@ -45,7 +45,7 @@ export default async function VehiclesCrud({
           </tbody>
         </table>
       </div>
-      {totalPages && <Pagination totalPages={totalPages} />}
+      {totalPages && <Pagination totalPage={totalPages} />}
     </div>
   );
 }

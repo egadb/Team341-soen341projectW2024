@@ -77,7 +77,7 @@ export async function createVehicle(prevState: any, formData: FormData) {
           throw new Error("Failed to delete vehicle");
         }
       }
-    export async function getAllVehicles(searchParams: { [key: string]: string | string[] | undefined }) {
+    export async function getAllVehicles(searchParams: { [key: string]: string | undefined }) {
         await connectMongoDB();
       
         const search = searchParams.search || "";
@@ -98,13 +98,13 @@ export async function createVehicle(prevState: any, formData: FormData) {
             .limit(limit)
             .skip(skip);
       
-          const count = await Vehicle.find({
+          const count = await Vehicle.countDocuments({
             $or: [
               { model: { $regex: search, $options: "i" } },
               { type: { $regex: search, $options: "i" } },
               { category: { $regex: search, $options: "i" } },
             ],
-          }).count();
+          });
       
           const totalPages = Math.ceil(count / limit);
           const vehicleArray = vehicles.map((vehicle) => ({

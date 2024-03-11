@@ -48,6 +48,11 @@ Here is a list of steps to take to run the project.
      ```
      
    - [Install pnpm](https://pnpm.io/installation)
+   - Install all the dependencies
+     
+      ```
+      pnpm install
+     ```
    - Now, go to the folder you clone the repo in, find the project folder (soen341-rentalapp) and run this command:
      
       ```
