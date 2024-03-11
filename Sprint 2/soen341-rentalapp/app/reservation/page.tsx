@@ -222,7 +222,6 @@ export default function ReservationForm() {
             Submit
           </button>
         </Provider>
-        <Link href={"/reservationPage"}>Go Reservation Page</Link>
       </div>
     </div>
   );
