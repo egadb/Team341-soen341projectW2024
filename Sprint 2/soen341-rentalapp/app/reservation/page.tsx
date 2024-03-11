@@ -86,8 +86,9 @@ export default function ReservationForm() {
       priceRange: priceRange,
       additionalFeatures: additionalFeatures
     }
-    router.push(`/reservationPage?typeVehicle=${typeVehicle}&category=${category}&priceRange=${priceRange}`)
     console.log(data)
+    router.push(`/reservationPage?typeVehicle=${typeVehicle}&category=${category}&priceRange=${priceRange}`)
+
   };
 
   return (
@@ -221,7 +222,6 @@ export default function ReservationForm() {
             Submit
           </button>
         </Provider>
-        <Link href={"/reservationPage"}>Go Reservation Page</Link>
       </div>
     </div>
   );
