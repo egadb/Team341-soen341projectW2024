@@ -1,5 +1,9 @@
 name: Deployment Workflow
 
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
 # Trigger this workflow on pushes to the specified branch
 on:
   push:
