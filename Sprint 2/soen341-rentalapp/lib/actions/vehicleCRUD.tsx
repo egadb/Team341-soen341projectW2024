@@ -77,7 +77,7 @@ export async function createVehicle(prevState: any, formData: FormData) {
           throw new Error("Failed to delete vehicle");
         }
       }
-    export async function getAllVehicles(searchParams: { [key: string]: string | string[] | undefined }) {
+    export async function getAllVehicles(searchParams: { [key: string]: string | undefined }) {
         await connectMongoDB();
       
         const search = searchParams.search || "";

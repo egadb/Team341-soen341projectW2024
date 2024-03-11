@@ -1,17 +1,17 @@
 "use server";
 
+import Reservation from "@/models/reservation";
 import { revalidatePath } from "next/cache";
 import { connectMongoDB } from "../mongodb";
-import Reservation from "@/models/reservation";
 
 export async function createReservation(prevState: any, formData: FormData) {
-    const isValid = !!(
-       formData.get("userID") &&
-       formData.get("vehicleID") &&
-       formData.get("pickupDate") &&
-       formData.get("endDate") &&
-       formData.get("extraFeatures")
-    );
+  const isValid = !!(
+    formData.get("userID") &&
+    formData.get("vehicleID") &&
+    formData.get("pickupDate") &&
+    formData.get("endDate") &&
+    formData.get("extraFeatures")
+  );
 
   if (isValid) {
     await connectMongoDB();
@@ -22,11 +22,11 @@ export async function createReservation(prevState: any, formData: FormData) {
     let extraFeatures = formData.get("extraFeatures")?.toString();
 
     const newReservation = new Reservation({
-        userID,
-        vehicleID,
-        pickupDate,
-        endDate,
-        extraFeatures
+      userID,
+      vehicleID,
+      pickupDate,
+      endDate,
+      extraFeatures,
     });
 
     try {
@@ -59,7 +59,13 @@ export async function updateReservation(prevState: any, formData: FormData) {
     const extraFeatures = formData.get("extraFeatures")?.toString();
 
     try {
-      const reservation = await Reservation.findByIdAndUpdate(_id, { userID, vehicleID, pickupDate, endDate, extraFeatures });
+      const reservation = await Reservation.findByIdAndUpdate(_id, {
+        userID,
+        vehicleID,
+        pickupDate,
+        endDate,
+        extraFeatures,
+      });
       await reservation.save();
     } catch (err: any) {
       throw new Error("Failed to update reservation");
@@ -67,14 +73,14 @@ export async function updateReservation(prevState: any, formData: FormData) {
   }
 }
 
-export async function getAllReservations(searchParams: { [key: string]: string | string[] | undefined }) {
+export async function getAllReservations(searchParams: { [key: string]: string | undefined }) {
   await connectMongoDB();
 
   const search = searchParams.search || "";
-  const sort = searchParams.search || "createdAt";
-  const limit = searchParams.limit * 1 || 12;
-  const page = searchParams.page * 1 || 1;
-  const skip = searchParams.skip * 1 || limit * (page - 1);
+  const sort = searchParams.sort || "createdAt";
+  const limit = searchParams.limit ? parseInt(searchParams.limit, 10) : 12;
+  const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
+  const skip = limit * (page - 1);
 
   try {
     const reservations = await Reservation.find({
@@ -105,7 +111,7 @@ export async function getAllReservations(searchParams: { [key: string]: string |
       vehicleID: reservation.vehicleID,
       pickupDate: reservation.pickupDate,
       endDate: reservation.endDate,
-      extraFeatures: reservation.extraFeatures
+      extraFeatures: reservation.extraFeatures,
     }));
     return { reservations: reservationArray, count, totalPage };
   } catch (err: any) {
