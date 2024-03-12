@@ -2,6 +2,7 @@
 
 This project is a Car Rental Application for Customers, Customer Service Representatives and System Administrators
 
+Deployed URL: https://team341-soen341project-w2024-lm14y6tqc-soen341.vercel.app/
 ## Description
 
 **1. Customers**
