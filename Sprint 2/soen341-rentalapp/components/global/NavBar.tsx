@@ -1,5 +1,6 @@
 "use client";
 
+import { signOut } from "next-auth/react";
 import Link from "next/link";
 
 interface NavBarButtonProps {
@@ -17,7 +18,8 @@ function NavBarButton({ name, path }: NavBarButtonProps) {
   );
 }
 
-export default function NavBar() {
+export default async function NavBar({ session }: any) {
+  console.log(session);
   return (
     <div
       className="flex"
@@ -32,9 +34,20 @@ export default function NavBar() {
         <Link href="/">
           <h1 className="cursor-pointer p-4 text-2xl font-bold text-white">Car Rental</h1>
         </Link>
-        <NavBarButton name="Login" path="/login" />
-        <NavBarButton name="Register" path="/register" />
-        <NavBarButton name="Reserve" path="/reservation" />
+        {!session && <NavBarButton name="Login" path="/login" />}
+        {!session && <NavBarButton name="Register" path="/register" />}
+        {session && <NavBarButton name="Reserve" path="/reservation" />}
+        <div className="p-4">
+          {session && (
+            <button
+              className="rounded-md bg-green-600 px-4 py-2 font-bold text-white"
+              name="Logout"
+              onClick={() => signOut()}
+            >
+              Logout
+            </button>
+          )}
+        </div>
       </nav>
     </div>
   );
