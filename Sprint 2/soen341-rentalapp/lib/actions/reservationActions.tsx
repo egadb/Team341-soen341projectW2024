@@ -1,7 +1,9 @@
 "use server";
 
 import Reservation from "@/models/reservation";
+import User from "@/models/user";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { connectMongoDB } from "../mongodb";
 
 export async function createReservation(prevState: any, formData: FormData) {
@@ -37,6 +39,41 @@ export async function createReservation(prevState: any, formData: FormData) {
   }
 }
 
+export async function createReservationUser(prevState: any, formData: FormData) {
+  const isValid = !!(
+    formData.get("userID") &&
+    formData.get("vehicleID") &&
+    formData.get("pickupDate") &&
+    formData.get("endDate") &&
+    formData.get("extraFeatures")
+  );
+
+  if (isValid) {
+    await connectMongoDB();
+    let userID = formData.get("userID")?.toString();
+    const user = await User.findOne({ email: userID });
+    userID = user._id;
+    let vehicleID = formData.get("vehicleID")?.toString();
+    let pickupDate = formData.get("pickupDate")?.toString();
+    let endDate = formData.get("endDate")?.toString();
+    let extraFeatures = formData.get("extraFeatures")?.toString();
+
+    const newReservation = new Reservation({
+      userID,
+      vehicleID,
+      pickupDate,
+      endDate,
+      extraFeatures,
+    });
+    try {
+      await newReservation.save();
+    } catch (err: any) {
+      throw new Error("Failed to create reservation");
+    }
+    redirect("/myReservations");
+  }
+}
+
 export async function updateReservation(prevState: any, formData: FormData) {
   const isValid = !!(
     formData.get("_id") &&
@@ -46,8 +83,6 @@ export async function updateReservation(prevState: any, formData: FormData) {
     formData.get("endDate") &&
     formData.get("extraFeatures")
   );
-
-  console.log(formData);
 
   if (isValid) {
     await connectMongoDB();
@@ -83,37 +118,41 @@ export async function getAllReservations(searchParams: { [key: string]: string |
   const skip = limit * (page - 1);
 
   try {
-    const reservations = await Reservation.find({
-      $or: [
-        { userID: { $regex: search, $options: "i" } },
-        { vehicleID: { $regex: search, $options: "i" } },
-        { pickupDate: { $regex: search, $options: "i" } },
-        { endDate: { $regex: search, $options: "i" } },
-      ],
-    })
-      .sort(sort)
-      .limit(limit)
-      .skip(skip);
-
-    const count = await Reservation.countDocuments({
-      $or: [
-        { userID: { $regex: search, $options: "i" } },
-        { vehicleID: { $regex: search, $options: "i" } },
-        { pickupDate: { $regex: search, $options: "i" } },
-        { endDate: { $regex: search, $options: "i" } },
-      ],
-    });
+    const reservations = await Reservation.find().sort(sort).limit(limit).skip(skip);
+    const count = await Reservation.countDocuments();
 
     const totalPage = Math.ceil(count / limit);
     const reservationArray = reservations.map((reservation) => ({
       _id: reservation._id.toString(),
-      userID: reservation.userID,
-      vehicleID: reservation.vehicleID,
-      pickupDate: reservation.pickupDate,
-      endDate: reservation.endDate,
+      userID: reservation.userID.toString(),
+      vehicleID: reservation.vehicleID.toString(),
+      pickupDate: reservation.pickupDate.toString(),
+      endDate: reservation.endDate.toString(),
       extraFeatures: reservation.extraFeatures,
     }));
     return { reservations: reservationArray, count, totalPage };
+  } catch (err: any) {
+    throw new Error("Failed to get reservations");
+  }
+}
+
+export async function getUserReservations(userEmail: string) {
+  await connectMongoDB();
+
+  try {
+    const user = await User.findOne({ email: userEmail });
+    const reservations = await Reservation.find({ userID: user._id });
+    const count = await Reservation.countDocuments();
+
+    const reservationArray = reservations.map((reservation) => ({
+      _id: reservation._id.toString(),
+      userID: reservation.userID.toString(),
+      vehicleID: reservation.vehicleID.toString(),
+      pickupDate: reservation.pickupDate.toString(),
+      endDate: reservation.endDate.toString(),
+      extraFeatures: reservation.extraFeatures,
+    }));
+    return { reservations: reservationArray, count };
   } catch (err: any) {
     throw new Error("Failed to get reservations");
   }

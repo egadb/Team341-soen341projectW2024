@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useEditItemContext } from "./Provider";
+import { useEditItemContext } from "../global/Provider";
 
 export default function CreateItemButton(params: any) {
   const { createItem, setCreateItem } = useEditItemContext();

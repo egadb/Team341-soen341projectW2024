@@ -1,7 +1,7 @@
 "use client";
 import Provider from "../form/Provider";
 import Spinner from "../form/Spinner";
-import { useEditItemContext } from "./Provider";
+import { useEditItemContext } from "../global/Provider";
 
 export default function FormWrapper(updateAction: any, createAction: any) {
   const { editItem, setEditItem, createItem, setCreateItem } = useEditItemContext();

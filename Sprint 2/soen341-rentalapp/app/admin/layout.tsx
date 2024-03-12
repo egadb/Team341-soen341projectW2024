@@ -1,4 +1,4 @@
-import { Provider } from "@/components/admin/Provider";
+import { Provider } from "@/components/global/Provider";
 import Link from "next/link";
 
 export default function RootLayout({

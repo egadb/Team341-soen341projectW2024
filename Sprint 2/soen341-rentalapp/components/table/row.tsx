@@ -1,10 +1,10 @@
 "use client";
 
+import { deleteReservation } from "@/lib/actions/reservationActions";
 import { deleteUser } from "@/lib/actions/usersActions";
 import { deleteVehicle } from "@/lib/actions/vehicleCRUD";
 import { useTransition } from "react";
-import { useEditItemContext } from "../admin/Provider";
-import { deleteReservation } from "@/lib/actions/reservationActions";
+import { useEditItemContext } from "../global/Provider";
 
 export default function TableRow(item: any) {
   let [isPending, startTransition] = useTransition();
@@ -21,7 +21,7 @@ export default function TableRow(item: any) {
       if (window.confirm("Are you sure you want to delete this user?")) {
         await deleteUser(_id);
       }
-    } else if (currentPath.includes('/reservations')) {
+    } else if (currentPath.includes("reservations") || currentPath.includes("Reservations")) {
       if (window.confirm("Are you sure you want to delete this reservation?")) {
         await deleteReservation(_id);
       }

@@ -54,7 +54,7 @@ export default function ReservationForm() {
     const newPickupDate = formData.get("pickupDate") as string;
     const newReturnDate = formData.get("returnDate") as string;
     const newType = formData.get("typeVehicle") as string;
-    const newCategory = formData.get("category") as string;
+    const newCategory = formData.get("categoryDropdown") as string;
     const newPriceRange = formData.get("priceRange") as string;
 
     setLocation(newLocation);
@@ -86,7 +86,7 @@ export default function ReservationForm() {
     };
     console.log(data);
     router.push(
-      `/reservationPage?typeVehicle=${typeVehicle}&category=${category}&priceRange=${priceRange}`
+      `/reservationPage?type=${typeVehicle}&category=${category}&priceRange=${priceRange}&pickupDate=${pickupDate}&returnDate=${returnDate}`
     );
   };
 
@@ -164,7 +164,7 @@ export default function ReservationForm() {
             required
             onChange={handleChange}
           >
-            <option value="" disabled selected>
+            <option value="Select a Price Range ($/day)" disabled>
               Select a Price Range ($/day)
             </option>
             <option value="30-50">30$ to 50$</option>

@@ -3,22 +3,24 @@ import mongoose, { Schema, models } from "mongoose";
 const reservationSchema = new Schema(
   {
     userID: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "User",
       default: "",
       required: true,
     },
     vehicleID: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: "Vehicle",
       default: "",
       required: true,
     },
     pickupDate: {
-      type: String,
+      type: Date,
       default: "",
       required: true,
     },
     endDate: {
-      type: String,
+      type: Date,
       default: "",
       required: true,
     },

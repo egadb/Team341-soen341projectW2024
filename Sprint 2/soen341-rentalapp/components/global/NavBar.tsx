@@ -19,7 +19,6 @@ function NavBarButton({ name, path }: NavBarButtonProps) {
 }
 
 export default async function NavBar({ session }: any) {
-  console.log(session);
   return (
     <div
       className="flex"

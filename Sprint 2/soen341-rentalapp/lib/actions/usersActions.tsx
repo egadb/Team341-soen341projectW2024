@@ -102,8 +102,6 @@ export async function updateUser(prevState: any, formData: FormData) {
     formData.get("role")
   );
 
-  console.log(formData);
-
   if (isValid) {
     await connectMongoDB();
     const _id = formData.get("_id")?.toString();
