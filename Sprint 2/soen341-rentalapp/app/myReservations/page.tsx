@@ -5,7 +5,7 @@ import { getUserReservations, updateReservation } from "@/lib/actions/reservatio
 import { getUserSession } from "@/lib/session";
 
 export default async function myReservations() {
-  const session = await getUserSession();
+  const session: any = await getUserSession();
   if (!session) return <div>Session Expired! Please Log In</div>;
   const userReservations = await getUserReservations(session.user.email);
   return (
