@@ -28,7 +28,7 @@ export default async function ReservationPage({
             <FormWrapper createAction={createReservationUser} user={session} />
             <div className="grid grid-cols-3 grid-rows-3 items-center gap-10">
               {vehicles.map((vehicle) => (
-                <VehicleCard vehicle={vehicle} />
+                <VehicleCard key={vehicle._id} vehicle={vehicle} />
               ))}
             </div>
           </Provider>
