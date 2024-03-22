@@ -18,7 +18,7 @@ export default async function ReservationPage({
     <div className="h-full bg-sky-100 p-4">
       <div className="mx-auto flex max-w-max flex-col items-center">
         <div>
-          <div className="mb-12 flex w-full items-center justify-between p-8">
+          <div className="mb-12 flex w-full items-center justify-between p-8 gap-5">
             <h1 className="text-4xl font-bold antialiased">Choose your vehicle!</h1>
             <div className="rounded-lg bg-gray-200 p-2">
               <h3 className="font-bold">{count} Vehicles Found</h3>
