@@ -36,6 +36,7 @@ export default async function NavBar({ session }: any) {
         {!session && <NavBarButton name="Login" path="/login" />}
         {!session && <NavBarButton name="Register" path="/register" />}
         {session && <NavBarButton name="Reserve" path="/reservation" />}
+        {session && <NavBarButton name="Time To Pick Up!" path="/checkIn" />}
         <div className="p-4">
           {session && (
             <button
