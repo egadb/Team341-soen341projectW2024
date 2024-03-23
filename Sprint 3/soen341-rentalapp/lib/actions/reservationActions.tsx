@@ -16,6 +16,7 @@ export async function createReservation(prevState: any, formData: FormData) {
   );
 
   if (isValid) {
+    console.log(formData);
     await connectMongoDB();
     let userID = formData.get("userID")?.toString();
     let vehicleID = formData.get("vehicleID")?.toString();
@@ -47,7 +48,7 @@ export async function createReservationUser(prevState: any, formData: FormData) 
     formData.get("endDate") &&
     formData.get("extraFeatures")
   );
-
+  console.log(formData);
   if (isValid) {
     await connectMongoDB();
     let userID = formData.get("userID")?.toString();
