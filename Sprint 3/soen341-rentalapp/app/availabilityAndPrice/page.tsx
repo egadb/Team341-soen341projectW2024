@@ -42,8 +42,8 @@ export default function availabilityAndPrice({
 
   const onConfirm = () => {
     router.push(
-      `/providePaymentPage?carId=${"cardIdMock"}&pickupDate=${dateOfPickup.toString()}&dropoffDate=${dateOfDropoff.toString()}
-       &featuresStr=${featuresStr}&branch=${branch}`
+      `/providePaymentPage?vehicleID=${"65ecb5f6fe7ce0e665b6a591"}&pickupDate=${dateOfPickup.toString()}&endDate=${dateOfDropoff.toString()}
+       &extraFeatures=${featuresStr}`
     );
   };
 

@@ -18,7 +18,7 @@ function NavBarButton({ name, path }: NavBarButtonProps) {
   );
 }
 
-export default async function NavBar({ session }: any) {
+export default function NavBar({ session }: any) {
   return (
     <div
       className="flex"
