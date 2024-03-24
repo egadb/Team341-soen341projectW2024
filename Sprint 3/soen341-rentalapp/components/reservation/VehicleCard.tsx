@@ -1,23 +1,23 @@
 "use client";
 import Image from "next/image";
 import { useEditItemContext } from "../global/Provider";
+import { FaInfoCircle } from "react-icons/fa";
 
 export default function VehicleCard(vehicle: any) {
   const { setCreateItem } = useEditItemContext();
 
   vehicle = vehicle.vehicle;
   return (
-    <div
-      key={vehicle._id}
-      onClick={() => setCreateItem(vehicle)}
-      className="mx-auto flex h-full flex-col justify-between gap-6 rounded-lg border border-white bg-white p-3 hover:shadow-2xl"
-    >
+    <div className="mx-auto flex h-full flex-col justify-between gap-6 rounded-lg border border-white bg-white p-3 hover:shadow-2xl cursor-pointer">
       <div className="flex justify-between">
         <p className="font-bold">{vehicle.model}</p>
         <div className="">
           <div className="">
-            <button className="text-2xl text-green-500 hover:text-green-400">
-              {/* <FaCartArrowDown /> */}
+            <button 
+            key={vehicle._id} 
+            onClick={() => setCreateItem(vehicle)} 
+            className="text-2xl text-sky-700 hover:text-sky-500">
+              <FaInfoCircle />
             </button>
           </div>
         </div>

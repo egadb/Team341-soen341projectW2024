@@ -6,10 +6,10 @@ import { getUserSession } from "@/lib/session";
 
 export default async function myReservations() {
   const session: any = await getUserSession();
-  if (!session) return <div>Session Expired! Please Log In</div>;
+  if (!session) return <div className="flex h-screen text-red-500 font-bold">Session Expired! Please Log In</div>;
   const userReservations = await getUserReservations(session.user.email);
   return (
-    <div className="flex w-full flex-col rounded-lg px-12 py-4">
+    <div className="flex h-screen w-full flex-col rounded-lg px-12 py-4">
       <h1 className="p-5 text-5xl font-bold">My Reservations</h1>
       <Provider>
         <FormWrapper updateAction={updateReservation}></FormWrapper>
