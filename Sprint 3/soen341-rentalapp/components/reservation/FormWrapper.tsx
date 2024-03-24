@@ -102,9 +102,9 @@ export default function FormWrapper(actions: any) {
                       <div>{searchParams.get("location")}</div>
                       <div className=""><FaLocationDot /></div>
                     </div>
-                    <h1 className="text-lg">
+                    {/* <h1 className="text-lg">
                       <span className="font-bold">Additional Features: </span> {additionalFeaturesArr?.join(", ")}
-                    </h1>
+                    </h1> */}
                 </div>
               </div>
               <div className="ml-6 flex flex-row justify-between items-center">
