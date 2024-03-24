@@ -24,17 +24,6 @@ export default function availabilityAndPrice({
       }
     | undefined
   >();
-  const [reservations, setReservations] = useState<
-    | Array<{
-        _id: string;
-        userID: string;
-        vehicleID: string;
-        pickupDate: string;
-        endDate: string;
-        extraFeatures: string[];
-      }>
-    | undefined
-  >(undefined);
   const [isAvailable, setIsAvailable] = useState(true);
   const [hasInsurance, setHasInsurance] = useState(false);
   const [hasGPS, setHasGPS] = useState(false);
@@ -67,6 +56,8 @@ export default function availabilityAndPrice({
 
     fetchVehicle();
     fetchReservations();
+  }, []);
+  useEffect(() => {
     checkAdditionalFeaturesAndTotalPrice(featuresArr);
   }, []);
   const checkIsAvailable = (pickupDate: Date, returnDate: Date, reservations: any) => {
@@ -117,21 +108,23 @@ export default function availabilityAndPrice({
        &extraFeatures=${featuresStr}`
     );
   };
-  console.log(featuresStr, "additionalServices");
   const checkAdditionalFeaturesAndTotalPrice = (features: string[]) => {
     console.log(features, "features");
+    setAdditionalPrice(0);
+    let totalAdditionalPrice = 0;
     features.forEach((feature) => {
       if (feature === "Insurance") {
         setHasInsurance(true);
-        setAdditionalPrice((prevPrice) => prevPrice + 50);
+        totalAdditionalPrice += 50;
       } else if (feature === "GPS") {
         setHasGPS(true);
-        setAdditionalPrice((prevPrice) => prevPrice + 50);
+        totalAdditionalPrice += 50;
       } else if (feature === "Wifi") {
         setHasWifi(true);
-        setAdditionalPrice((prevPrice) => prevPrice + 50);
+        totalAdditionalPrice += 50;
       }
     });
+    setAdditionalPrice(totalAdditionalPrice);
   };
   return isAvailable ? (
     <div className="h-screen bg-sky-100">
