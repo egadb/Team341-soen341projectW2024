@@ -73,7 +73,7 @@ export default function FormWrapper(actions: any) {
                   </div>
                 </div>
                 <div className=" w-auto pt-8 flex flex-col gap-4">
-                    <div className="flex flex-row justify-between items-center">
+                    <div className="flex flex-row justify-between items-center gap-4">
                     <div className=" w-fit p-2 rounded-lg bg-gray-100">
                       <h1 className="text-xl font-bold">
                         {createItem.category}
