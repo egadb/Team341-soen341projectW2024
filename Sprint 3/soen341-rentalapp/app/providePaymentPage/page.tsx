@@ -33,6 +33,7 @@ export default async function ProvidePaymentInfo({
   };
   const confirmation = () => {
     alert("Payment information confirmed! An email has been sent to you!");
+    //need to send email
     redirect("/");
   };
   const handleConfirm = async () => {
