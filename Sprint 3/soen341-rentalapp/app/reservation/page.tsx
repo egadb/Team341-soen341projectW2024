@@ -86,7 +86,7 @@ export default function ReservationForm() {
     };
     console.log(data);
     router.push(
-      `/reservationPage?type=${typeVehicle}&category=${category}&priceRange=${priceRange}&pickupDate=${pickupDate}&returnDate=${returnDate}`
+      `/reservationPage?location=${location}&type=${typeVehicle}&category=${category}&priceRange=${priceRange}&pickupDate=${pickupDate}&returnDate=${returnDate}&additionalFeatures=${additionalFeatures}`
     );
   };
 
@@ -106,9 +106,9 @@ export default function ReservationForm() {
             <option value="" disabled selected>
               Select a Location
             </option>
-            <option value="montreal">Montreal</option>
-            <option value="laval">Laval</option>
-            <option value="west-island">West Island</option>
+            <option value="Montreal">Montreal</option>
+            <option value="Laval">Laval</option>
+            <option value="West-Island">West Island</option>
           </select>
           Pickup Date
           <input
@@ -164,7 +164,7 @@ export default function ReservationForm() {
             required
             onChange={handleChange}
           >
-            <option value="Select a Price Range ($/day)" disabled>
+            <option value="Select a Price Range ($/day)" disabled selected>
               Select a Price Range ($/day)
             </option>
             <option value="30-50">30$ to 50$</option>
@@ -177,7 +177,7 @@ export default function ReservationForm() {
               <input
                 type="checkbox"
                 name="sunroof"
-                value="sunroof"
+                value="Sunroof"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -187,7 +187,7 @@ export default function ReservationForm() {
               <input
                 type="checkbox"
                 name="leatherSeats"
-                value="leatherSeats"
+                value="Leather Seats"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -197,7 +197,7 @@ export default function ReservationForm() {
               <input
                 type="checkbox"
                 name="heatedSeats"
-                value="heatedSeats"
+                value="Heated Seats"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
@@ -207,7 +207,7 @@ export default function ReservationForm() {
               <input
                 type="checkbox"
                 name="backupCamera"
-                value="backupCamera"
+                value="Backup Camera"
                 className="mr-2"
                 onChange={handleCheckboxChange}
               />
