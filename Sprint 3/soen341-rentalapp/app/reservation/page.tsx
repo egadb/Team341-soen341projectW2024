@@ -63,8 +63,8 @@ export default function ReservationForm() {
 
   const handleSearch = () => {
     const postalCode = (document.getElementsByName("postalCode")[0] as HTMLInputElement).value;
-    console.log(postalCode);
-    // Perform the search logic using the postalCode value
+    // console.log(postalCode);
+    
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -139,9 +139,9 @@ export default function ReservationForm() {
             <option value="" disabled selected>
               Select a Location
             </option>
-            <option value="Montreal">Montreal</option>
-            <option value="Laval">Laval</option>
-            <option value="West-Island">West Island</option>
+            <option value="Montreal">Montreal (H4Y 1H1) </option>
+            <option value="Laval">Laval (H7T 2Y5) </option>
+            <option value="West-Island">West Island (H9R 5J2) </option>
           </select>
           Pickup Date
           <input
