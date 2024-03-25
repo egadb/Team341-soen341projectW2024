@@ -107,7 +107,7 @@ export default function ReservationForm() {
       <div className="rounded-lg border-t-4 border-sky-900 bg-slate-100 p-5 shadow-lg">
         <h1 className="my-4 text-4xl font-bold">Reservation</h1>
         <Provider formAction={handleSubmit}>
-          <Spinner />
+          <Spinner />       
           <input
             type="text"
             className="rounded-md border-2 p-3 text-gray-400"
@@ -116,6 +116,12 @@ export default function ReservationForm() {
             required
             onChange={handleChange}
           />
+          <button
+            type="button"
+            className="cursor-pointer rounded-lg bg-sky-900 px-6 py-2 font-bold text-white hover:bg-sky-950"
+          >
+            Search Nearest Branch
+          </button>
           <select
             id="locationDropdown"
             className="rounded-md border-2 p-3 text-gray-400"
