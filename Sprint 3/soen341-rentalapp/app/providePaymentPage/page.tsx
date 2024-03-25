@@ -48,6 +48,13 @@ export default async function ProvidePaymentInfo({
       expiryDate,
       cvv
     );
+    function generateBookingNumber(): string {
+      const min = 10000;
+      const max = 99999;
+      const bookingNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+      return bookingNumber.toString();
+    }
+    const bookingNumber = generateBookingNumber();
 
     if (!isValidCardNumber || !isValidExpiryDate || !isValidCVV) {
       alert("Invalid payment information");
