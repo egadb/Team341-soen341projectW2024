@@ -25,6 +25,7 @@ export default async function ReservationsCrud({
     pickupDate: newReservation.pickupDate,
     endDate: newReservation.endDate,
     extraFeatures: newReservation.extraFeatures,
+    price: newReservation.price,
   };
   return (
     <div className="w-[80%]">
@@ -32,13 +33,14 @@ export default async function ReservationsCrud({
       <div className="flex w-full flex-col rounded-lg px-12 py-4">
         <Features newItemModel={newReservationJSON} />
         <table className="table-auto rounded-xl border bg-white">
-          <thead>
+          <thead className="">
             <tr>
               <th>userID</th>
               <th>vehicleID</th>
               <th>pickupDate</th>
               <th>endDate</th>
               <th>extraFeatures</th>
+              <th>price</th>
             </tr>
           </thead>
           <tbody>

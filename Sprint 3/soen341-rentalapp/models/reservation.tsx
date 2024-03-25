@@ -29,6 +29,11 @@ const reservationSchema = new Schema(
       default: "",
       required: true,
     },
+    price: {
+      type: Number,
+      default: 0,
+      required: false,
+    },
   },
   { timestamps: true }
 );
