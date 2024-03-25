@@ -5,6 +5,7 @@ import Spinner from "@/components/form/Spinner";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import {Client} from "@googlemaps/google-maps-services-js";
+import axios from "axios";
 
 
   // const client = new Client({});
@@ -61,9 +62,18 @@ export default function ReservationForm() {
     }
   };
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     const postalCode = (document.getElementsByName("postalCode")[0] as HTMLInputElement).value;
-    alert(postalCode)
+    const key = "AIzaSyCi9Jwy-jBByWCKl6XZ8d_j6Zm6ZYSSYYU";
+    const pcBranch1 = "H4Y 1H1";
+    try {
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${destination}&key=${key}`)
+    }
+    catch (error) {
+      console.error(error);
+    }
+    alert(postalCode);
     
   };
 
