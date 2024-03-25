@@ -34,6 +34,7 @@ export default async function ProvidePaymentInfo({
   const confirmation = () => {
     alert("Payment information confirmed! An email has been sent to you!");
     //need to send email
+    //send booking number, pickup date, return date, location
     redirect("/");
   };
   const handleConfirm = async () => {
@@ -48,13 +49,6 @@ export default async function ProvidePaymentInfo({
       expiryDate,
       cvv
     );
-    function generateBookingNumber(): string {
-      const min = 10000;
-      const max = 99999;
-      const bookingNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-      return bookingNumber.toString();
-    }
-    const bookingNumber = generateBookingNumber();
 
     if (!isValidCardNumber || !isValidExpiryDate || !isValidCVV) {
       alert("Invalid payment information");
