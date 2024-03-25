@@ -69,11 +69,20 @@ export default function ReservationForm() {
     const pcBranch2 = "H7T2Y5";
     const pcBranch3 = "H9R5J2";
     try {
-      const response = await axios.get(
-        `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
-        const duration = response.data.rows[0].elements[0].duration.text;
-        console.log(duration);
-        alert(duration);
+      const response1 = await axios.get(
+      `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
+      const duration1 = response1.data.rows[0].elements[0].duration.text;
+  
+      const response2 = await axios.get(
+      `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch2}&key=${key}`)
+      const duration2 = response2.data.rows[0].elements[0].duration.text;
+
+      const response3 = await axios.get(
+      `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
+      const duration3 = response3.data.rows[0].elements[0].duration.text;
+
+      alert(duration1 + " to Montreal Branch\n" + duration2 + " to Laval Branch\n" + duration3 + " to West Island Branch")
+
     }
     catch (error) {
       console.error(error);
