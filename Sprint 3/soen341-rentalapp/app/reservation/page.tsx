@@ -4,9 +4,7 @@ import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import {Client} from "@googlemaps/google-maps-services-js";
 import axios from "axios";
-
 
   // const client = new Client({});
   // const response = client.distancematrix({
@@ -63,31 +61,38 @@ export default function ReservationForm() {
   };
 
   const handleSearch = async () => {
+
     const postalCode = (document.getElementsByName("postalCode")[0] as HTMLInputElement).value;
     const key = "AIzaSyCi9Jwy-jBByWCKl6XZ8d_j6Zm6ZYSSYYU";
     const pcBranch1 = "H4Y1H1";
     const pcBranch2 = "H7T2Y5";
     const pcBranch3 = "H9R5J2";
+
+    //In order for this feature to work, assuming Google Chrome is being used, one will need to install the "Allow CORS: Access-Control-Allow-Origin" extension and enable it.
+
     try {
+      //Time from Montreal branch
       const response1 = await axios.get(
       `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
       const duration1 = response1.data.rows[0].elements[0].duration.text;
-  
+      
+      //Time from Laval branch
       const response2 = await axios.get(
       `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch2}&key=${key}`)
       const duration2 = response2.data.rows[0].elements[0].duration.text;
-
+      
+      //Time from West Island branch
       const response3 = await axios.get(
-      `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
+      `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch3}&key=${key}`)
       const duration3 = response3.data.rows[0].elements[0].duration.text;
 
       alert(duration1 + " to Montreal Branch\n" + duration2 + " to Laval Branch\n" + duration3 + " to West Island Branch")
-
     }
+
     catch (error) {
       console.error(error);
     }
-    // alert(postalCode);
+
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
