@@ -65,18 +65,20 @@ export default function ReservationForm() {
   const handleSearch = async () => {
     const postalCode = (document.getElementsByName("postalCode")[0] as HTMLInputElement).value;
     const key = "AIzaSyCi9Jwy-jBByWCKl6XZ8d_j6Zm6ZYSSYYU";
-    const pcBranch1 = "H4Y 1H1";
-    const pcBranch2 = "H7T 2Y5";
-    const pcBranch3 = "H9R 5J2";
+    const pcBranch1 = "H4Y1H1";
+    const pcBranch2 = "H7T2Y5";
+    const pcBranch3 = "H9R5J2";
     try {
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
-        const distance = response.data.rows[0].elements[0].distance.text;
+        const duration = response.data.rows[0].elements[0].duration.text;
+        console.log(duration);
+        alert(duration);
     }
     catch (error) {
       console.error(error);
     }
-    alert(postalCode);
+    // alert(postalCode);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
