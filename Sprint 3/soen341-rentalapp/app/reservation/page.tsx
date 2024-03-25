@@ -60,6 +60,13 @@ export default function ReservationForm() {
       setAdditionalFeatures(additionalFeatures.filter((feature) => feature !== value));
     }
   };
+
+  const handleSearch = () => {
+    const postalCode = (document.getElementsByName("postalCode")[0] as HTMLInputElement).value;
+    console.log(postalCode);
+    // Perform the search logic using the postalCode value
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
     const newLocation = formData.get("location") as string;
@@ -113,12 +120,12 @@ export default function ReservationForm() {
             className="rounded-md border-2 p-3 text-gray-400"
             name="postalCode"
             placeholder="Your Postal Code"
-            required
             onChange={handleChange}
           />
           <button
             type="button"
             className="cursor-pointer rounded-lg bg-sky-900 px-6 py-2 font-bold text-white hover:bg-sky-950"
+            onClick={handleSearch}
           >
             Search Nearest Branch
           </button>
