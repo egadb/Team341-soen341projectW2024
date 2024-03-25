@@ -4,8 +4,20 @@ import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+import {Client} from "@googlemaps/google-maps-services-js";
+
+
+  // const client = new Client({});
+  // const response = client.distancematrix({
+  //   params: {
+  //     origins: ["Montreal"],
+  //     destinations: ["Laval"],
+  //   },
+  // });
+  // console.log(response);
 
 export default function ReservationForm() {
+  
   const [location, setLocation] = useState("");
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
@@ -96,6 +108,14 @@ export default function ReservationForm() {
         <h1 className="my-4 text-4xl font-bold">Reservation</h1>
         <Provider formAction={handleSubmit}>
           <Spinner />
+          <input
+            type="text"
+            className="rounded-md border-2 p-3 text-gray-400"
+            name="postalCode"
+            placeholder="Your Postal Code"
+            required
+            onChange={handleChange}
+          />
           <select
             id="locationDropdown"
             className="rounded-md border-2 p-3 text-gray-400"
