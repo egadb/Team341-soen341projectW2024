@@ -2,7 +2,9 @@
 
 import Reservation from "@/models/reservation";
 import User from "@/models/user";
+import Vehicle from "@/models/vehicle";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { connectMongoDB } from "../mongodb";
 
 export async function createReservation(prevState: any, formData: FormData) {
@@ -166,5 +168,27 @@ export async function deleteReservation(_id: any) {
     return;
   } catch (err: any) {
     throw new Error("Failed to delete reservation");
+  }
+}
+
+export async function getReservationInfo(_id: any) {
+  await connectMongoDB();
+
+  try {
+    const reservation = await Reservation.findById(_id);
+    const user = await User.findById(reservation?.userID?.toString());
+    const vehicle = await Vehicle.findById(reservation?.vehicleID?.toString());
+    return { reservation: reservation, user: user, vehicle: vehicle };
+  } catch (err: any) {
+    throw new Error("Failed to get reservations");
+  }
+}
+
+export async function getAgreement(prevState: any, formData: FormData) {
+  const isValid = !!formData.get("bookingNumber");
+
+  if (isValid) {
+    var url = "/agreement?id=" + formData.get("bookingNumber");
+    redirect(url);
   }
 }
