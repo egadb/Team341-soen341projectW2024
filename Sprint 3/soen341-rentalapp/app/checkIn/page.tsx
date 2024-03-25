@@ -1,4 +1,5 @@
 const Form = () => {
+  
     return (
       <div className='bg-sky-100 p-8 justify-center items-center h-screen flex'>
           <form className='flex flex-col gap-4 border-t-4 bg-slate-100 border-sky-900 p-10 rounded-lg'>
@@ -33,7 +34,21 @@ const Form = () => {
               name='Credit Card Number'
               placeholder='Enter your Credit Card Number *'
             />
+
+            <div className="flex flex-wrap">
+              <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4">
+                <input
+                  type="checkbox"
+                  name="carInspection"
+                  value="Car Inspection"
+                  className="mr-2"
+                />
+                <span> Car Inspection - Click if inspection okay.</span>
+              </label>
+            </div>
+
             <p>* Must be same Credit Card number that was used when booking</p>
+
             <button
               className='bg-sky-900 hover:bg-sky-950 duration-300 text-white shadow p-2 rounded'
               type='submit'
