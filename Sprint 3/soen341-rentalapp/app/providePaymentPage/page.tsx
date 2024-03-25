@@ -3,10 +3,8 @@
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
 import { createReservationUser } from "@/lib/actions/reservationActions";
-import { getUserSession } from "@/lib/session";
-import { redirect } from "next/navigation";
 
-export default async function ProvidePaymentInfo({
+export default function ProvidePaymentInfo({
   params,
   searchParams,
 }: {
@@ -14,7 +12,7 @@ export default async function ProvidePaymentInfo({
   searchParams: { [key: string]: string | undefined };
 }) {
   const formData = new FormData();
-  const session = await getUserSession();
+  // const session = await getUserSession();
 
   const validateInfo = (cardNumber: string, expiryDate: string, cvv: string) => {
     const cardNumberRegex = /^[0-9]{13,16}$/;
@@ -31,11 +29,14 @@ export default async function ProvidePaymentInfo({
       isValidCVV,
     };
   };
-  const confirmation = () => {
+  const confirmation = async () => {
     alert("Payment information confirmed! An email has been sent to you!");
+    const response = await fetch("/api/email", {
+      method: "post",
+      body: formData,
+    });
     //need to send email
     //send booking number, pickup date, return date, location
-    redirect("/");
   };
   const handleConfirm = async () => {
     const cardNumber =
@@ -60,10 +61,9 @@ export default async function ProvidePaymentInfo({
       if (searchParams.hasOwnProperty(key)) {
         const value = searchParams[key] || "";
         formData.append(key, value);
-        console.log(`Appended ${key}: ${value}`);
       }
     }
-    formData.append("userID", session?.user?.email as string);
+    // formData.append("userID", session?.user?.email as string);
     createReservationUser(params.slug, formData);
     confirmation();
   };
