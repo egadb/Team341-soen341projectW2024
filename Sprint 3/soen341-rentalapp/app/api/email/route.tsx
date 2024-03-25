@@ -8,10 +8,9 @@ export async function POST(request: NextRequest) {
   const password = process.env.NEXT_PUBLIC_EMAIL_PASSWORD;
   const myEmail = process.env.NEXT_PUBLIC_PERSONAL_EMAIL;
 
-  //   const formData = await request.formData();
-  //   const name = formData.get("name");
-  //   const email = formData.get("email");
-  //   const message = formData.get("message");
+  const formData = await request.formData();
+  const reservation = formData.get("reservation");
+  console.log("alo", reservation);
 
   const transporter = nodemailer.createTransport({
     service: "Gmail",

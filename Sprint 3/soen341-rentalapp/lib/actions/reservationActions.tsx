@@ -49,7 +49,7 @@ export async function createReservationUser(prevState: any, formData: FormData) 
     formData.get("endDate") &&
     formData.get("extraFeatures")
   );
-  console.log(formData);
+
   if (isValid) {
     await connectMongoDB();
     let userID = formData.get("userID")?.toString();
@@ -67,8 +67,16 @@ export async function createReservationUser(prevState: any, formData: FormData) 
       endDate,
       extraFeatures,
     });
+    console.log("newReservation", newReservation);
+    const formData1 = new FormData();
+    formData1.append("reservation", newReservation);
+
     try {
       await newReservation.save();
+      await fetch("/api/email", {
+        method: "post",
+        body: formData1,
+      });
     } catch (err: any) {
       throw new Error("Failed to create reservation");
     }
