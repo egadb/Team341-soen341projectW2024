@@ -1,10 +1,8 @@
 import { Provider } from "@/components/global/Provider";
 import FormWrapper from "@/components/reservation/FormWrapper";
 import VehicleCard from "@/components/reservation/VehicleCard";
-import { createReservationUser } from "@/lib/actions/reservationActions";
 import { getAllAvailableVehicles } from "@/lib/actions/vehicleCRUD";
 import { getUserSession } from "@/lib/session";
-import {FaCartArrowDown} from 'react-icons/fa'
 
 export default async function ReservationPage({
   params,
@@ -18,7 +16,7 @@ export default async function ReservationPage({
   return (
     <div className="h-screen bg-sky-100 p-4">
       <div className="mx-auto flex max-w-max flex-col items-center">
-        <div className="mb-12 flex items-center justify-between p-8 gap-12">
+        <div className="mb-12 flex items-center justify-between gap-12 p-8">
           <h1 className="text-4xl font-bold antialiased">Choose your vehicle!</h1>
           <div className="rounded-lg bg-gray-200 p-2">
             <h3 className="font-bold">{count} Vehicles Found</h3>
@@ -26,7 +24,7 @@ export default async function ReservationPage({
         </div>
         <div>
           <Provider className="w-full">
-            <FormWrapper createAction={createReservationUser} user={session} />
+            <FormWrapper /*createAction={createReservationUser}*/ user={session} />
             <div className="grid grid-cols-3 grid-rows-2 items-center gap-10">
               {vehicles.map((vehicle) => (
                 <VehicleCard key={vehicle._id} vehicle={vehicle} />

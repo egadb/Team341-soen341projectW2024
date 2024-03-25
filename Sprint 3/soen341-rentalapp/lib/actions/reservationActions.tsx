@@ -3,7 +3,6 @@
 import Reservation from "@/models/reservation";
 import User from "@/models/user";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { connectMongoDB } from "../mongodb";
 
 export async function createReservation(prevState: any, formData: FormData) {
@@ -71,7 +70,7 @@ export async function createReservationUser(prevState: any, formData: FormData) 
     } catch (err: any) {
       throw new Error("Failed to create reservation");
     }
-    redirect("/myReservations");
+    //redirect("/myReservations");
   }
 }
 
