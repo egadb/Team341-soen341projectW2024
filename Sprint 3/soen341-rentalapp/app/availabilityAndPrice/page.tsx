@@ -1,52 +1,131 @@
 "use client";
 
-import { Schema } from "mongoose";
+import { getAllReservations } from "@/lib/actions/reservationActions";
+import { getAllVehicles } from "@/lib/actions/vehicleCRUD";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function availabilityAndPrice({
-  carId,
-  pickupDate,
-  dropoffDate,
-  additionalFeatures,
-  branch,
+  params,
+  searchParams,
 }: {
-  carId: Schema.Types.ObjectId;
-  pickupDate: Date;
-  dropoffDate: Date;
-  additionalFeatures: string[];
-  branch: string;
+  params: { slug: string };
+  searchParams: { [key: string]: string | undefined };
 }) {
-  const dateOfPickup = new Date("2022-03-01"); //hardcoding for now
+  const [vehicle, setVehicle] = useState<
+    | {
+        _id: string;
+        model: string;
+        type: string;
+        category: string;
+        price: string;
+        pictureURL: string;
+      }
+    | undefined
+  >();
+  const [isAvailable, setIsAvailable] = useState(true);
+  const [hasInsurance, setHasInsurance] = useState(false);
+  const [hasGPS, setHasGPS] = useState(false);
+  const [hasWifi, setHasWifi] = useState(false);
+  const [additionalPrice, setAdditionalPrice] = useState(0);
+  useEffect(() => {
+    const fetchVehicle = () => {
+      return getAllVehicles({})
+        .then(({ vehicles, count, totalPages }) => {
+          const foundVehicle = vehicles.find((vehicle) => vehicle._id === searchParams["carId"]);
+          setVehicle(foundVehicle);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch vehicles:", error);
+        });
+    };
+    const fetchReservations = () => {
+      return getAllReservations({})
+        .then(({ reservations, count, totalPage }) => {
+          const reservationsArr = reservations.filter(
+            (reservation) => reservation.vehicleID === searchParams["carId"]
+          );
+          console.log(reservationsArr, "reservationsArr");
+          checkIsAvailable(dateOfPickup, dateOfDropoff, reservationsArr);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch vehicles:", error);
+        });
+    };
+
+    fetchVehicle();
+    fetchReservations();
+  }, []);
+  useEffect(() => {
+    checkAdditionalFeaturesAndTotalPrice(featuresArr);
+  }, []);
+  const checkIsAvailable = (pickupDate: Date, returnDate: Date, reservations: any) => {
+    console.log(pickupDate, returnDate, reservations);
+    if (pickupDate >= returnDate) {
+      setIsAvailable(false); // Invalid date range, set availability to false
+    } else {
+      const available = !(reservations ?? []).some((reservation: any) => {
+        const reservationPickupDate = new Date(reservation.pickupDate);
+        const reservationReturnDate = new Date(reservation.endDate);
+        return (
+          (pickupDate >= reservationPickupDate && pickupDate < reservationReturnDate) ||
+          (returnDate > reservationPickupDate && returnDate <= reservationReturnDate) ||
+          (pickupDate <= reservationPickupDate && returnDate >= reservationReturnDate)
+        );
+      });
+
+      setIsAvailable(available); // Update the availability state once
+    }
+  };
+
+  const vehicleID = searchParams["carId"] || "";
+  const dateOfPickup = new Date(searchParams["pickupDate"] || "");
   const formattedPickupDate = dateOfPickup.toLocaleDateString("en-US", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   });
-  const dateOfDropoff = new Date("2022-03-02"); //hardcoding for now
+  const dateOfDropoff = new Date(searchParams["returnDate"] || "");
   const formattedDropoffDate = dateOfDropoff.toLocaleDateString("en-US", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
   });
-  const chosenBranch = "Montreal";
-  //hardcoding for now
-  const isAvailable = true;
-  //const featuresStr = additionalFeatures.join(', ');
-  const featuresStr = "Sunroof, Leather seats, Heated seats, Backup camera";
-  const carPrice = 50;
-  const pictureUrl =
-    "https://www.motortrend.com/uploads/sites/10/2022/02/2022-tesla-model-3-standard-range-plus-sedan-angular-front.png";
+  const reservationDuration = Math.ceil(
+    (dateOfDropoff.getTime() - dateOfPickup.getTime()) / (1000 * 60 * 60 * 24)
+  );
+  const chosenBranch = (searchParams["branch"] as string) || "";
+  const featuresStr = searchParams["additionalServices"];
+  const featuresArr: string[] = featuresStr?.split(",") ?? [];
+  const carPrice = vehicle?.price;
+  const pictureUrl = vehicle?.pictureURL;
   //if (!session) return <div>Session Expired! Please Log In</div>;
   const router = useRouter();
-
   const onConfirm = () => {
     router.push(
-      `/providePaymentPage?vehicleID=${"65ecb5f6fe7ce0e665b6a591"}&pickupDate=${dateOfPickup.toString()}&endDate=${dateOfDropoff.toString()}
-       &extraFeatures=${featuresStr}`
+      `/providePaymentPage?vehicleID=${vehicleID}&pickupDate=${dateOfPickup.toString()}&endDate=${dateOfDropoff.toString()}
+       &extraFeatures=${featuresStr}&branch=${chosenBranch}&price =${reservationDuration * Number(carPrice) + additionalPrice}`
     );
   };
-
+  const checkAdditionalFeaturesAndTotalPrice = (features: string[]) => {
+    console.log(features, "features");
+    setAdditionalPrice(0);
+    let totalAdditionalPrice = 0;
+    features.forEach((feature) => {
+      if (feature === "Insurance") {
+        setHasInsurance(true);
+        totalAdditionalPrice += 50;
+      } else if (feature === "GPS") {
+        setHasGPS(true);
+        totalAdditionalPrice += 50;
+      } else if (feature === "Wifi") {
+        setHasWifi(true);
+        totalAdditionalPrice += 50;
+      }
+    });
+    setAdditionalPrice(totalAdditionalPrice);
+  };
   return isAvailable ? (
     <div className="h-screen bg-sky-100">
       <div className="ml-40 flex justify-center">
@@ -81,31 +160,31 @@ export default function availabilityAndPrice({
               </tr>
               <tr>
                 <td className="py-2">Car (without additional features)</td>
-                <td className="py-2">50$</td> {/*get car price here multiplied by days of rental*/}
+                <td className="py-2">{reservationDuration * Number(carPrice)}$</td>
               </tr>
-              {/*only render if user chose sunroof*/}
-              <tr>
-                <td className="py-2">Sunroof</td>
-                <td className="py-2">50$</td>
-              </tr>
-              {/*only render if user chose leather seats*/}
-              <tr>
-                <td className="py-2">Leather seats</td>
-                <td className="py-2">50$</td>
-              </tr>
-              {/*only render if user chose heated seats*/}
-              <tr>
-                <td className="py-2">Heated seats</td>
-                <td className="py-2">50$</td>
-              </tr>
-              {/*only render if user chose backup camera*/}
-              <tr>
-                <td className="py-2">Backup camera</td>
-                <td className="py-2">50$</td>
-              </tr>
+              {hasInsurance && (
+                <tr>
+                  <td className="py-2">Insurance</td>
+                  <td className="py-2">50$</td>
+                </tr>
+              )}
+              {hasGPS && (
+                <tr>
+                  <td className="py-2">GPS Navigation</td>
+                  <td className="py-2">50$</td>
+                </tr>
+              )}
+              {hasWifi && (
+                <tr>
+                  <td className="py-2">Wifi HotSpot</td>
+                  <td className="py-2">50$</td>
+                </tr>
+              )}
               <tr>
                 <td className="py-2">Total</td>
-                <td className="py-2">250$</td>
+                <td className="py-2">
+                  {reservationDuration * Number(carPrice) + additionalPrice}$
+                </td>
               </tr>
             </tbody>
           </table>

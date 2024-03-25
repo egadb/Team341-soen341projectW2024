@@ -4,6 +4,7 @@ import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
 import { createReservationUser } from "@/lib/actions/reservationActions";
 import { getUserSession } from "@/lib/session";
+import { redirect } from "next/navigation";
 
 export default async function ProvidePaymentInfo({
   params,
@@ -30,7 +31,12 @@ export default async function ProvidePaymentInfo({
       isValidCVV,
     };
   };
-
+  const confirmation = () => {
+    alert("Payment information confirmed! An email has been sent to you!");
+    //need to send email
+    //send booking number, pickup date, return date, location
+    redirect("/");
+  };
   const handleConfirm = async () => {
     const cardNumber =
       (document.querySelector('input[name="cardNumber"]') as HTMLInputElement)?.value || "";
@@ -59,6 +65,7 @@ export default async function ProvidePaymentInfo({
     }
     formData.append("userID", session?.user?.email as string);
     createReservationUser(params.slug, formData);
+    confirmation();
   };
 
   return (

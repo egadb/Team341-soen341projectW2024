@@ -91,14 +91,14 @@ export default function ReservationForm() {
   };
 
   return (
-    <div className="bg-sky-100 grid h-screen place-items-center">
+    <div className="grid h-screen place-items-center bg-sky-100">
       <div className="rounded-lg border-t-4 border-sky-900 bg-slate-100 p-5 shadow-lg">
         <h1 className="my-4 text-4xl font-bold">Reservation</h1>
         <Provider formAction={handleSubmit}>
           <Spinner />
           <select
             id="locationDropdown"
-            className="rounded-md border-2 text-gray-400 p-3"
+            className="rounded-md border-2 p-3 text-gray-400"
             name={"location"}
             required
             onChange={handleChange}
@@ -113,7 +113,7 @@ export default function ReservationForm() {
           Pickup Date
           <input
             type="date"
-            className="rounded-md border-2 text-gray-400 p-3"
+            className="rounded-md border-2 p-3 text-gray-400"
             name="pickupDate"
             placeholder="Pickup Date"
             required
@@ -122,7 +122,7 @@ export default function ReservationForm() {
           Return Date
           <input
             type="date"
-            className="rounded-md border-2 text-gray-400 p-3"
+            className="rounded-md border-2 p-3 text-gray-400"
             name="returnDate"
             placeholder="Return Date"
             required
@@ -130,7 +130,7 @@ export default function ReservationForm() {
           />
           <select
             id="typeDropdown"
-            className="rounded-md border-2 text-gray-400 p-3"
+            className="rounded-md border-2 p-3 text-gray-400"
             name={"typeVehicle"}
             required
             onChange={handleChange}
@@ -145,7 +145,7 @@ export default function ReservationForm() {
           </select>
           <select
             id="categoryDropdown"
-            className="rounded-md border-2 text-gray-400 p-3"
+            className="rounded-md border-2 p-3 text-gray-400"
             name={"category"}
             required
             onChange={handleChange}
@@ -159,7 +159,7 @@ export default function ReservationForm() {
           </select>
           <select
             id="priceDropdown"
-            className="rounded-md border-2 text-gray-400 p-3"
+            className="rounded-md border-2 p-3 text-gray-400"
             name={"priceRange"}
             required
             onChange={handleChange}
@@ -216,7 +216,7 @@ export default function ReservationForm() {
           {/* </div> */}
           <button
             type="submit"
-            className="cursor-pointer bg-sky-900 hover:bg-sky-950 px-6 py-2 font-bold text-white rounded-lg"
+            className="cursor-pointer rounded-lg bg-sky-900 px-6 py-2 font-bold text-white hover:bg-sky-950"
           >
             Submit
           </button>
