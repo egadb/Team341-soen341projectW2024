@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.3.42",
     "nodemailer": "^6.9.13"
   }
 }
