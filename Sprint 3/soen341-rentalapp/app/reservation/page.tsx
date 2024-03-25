@@ -63,7 +63,7 @@ export default function ReservationForm() {
 
   const handleSearch = () => {
     const postalCode = (document.getElementsByName("postalCode")[0] as HTMLInputElement).value;
-    // console.log(postalCode);
+    alert(postalCode)
     
   };
 
@@ -120,7 +120,6 @@ export default function ReservationForm() {
             className="rounded-md border-2 p-3 text-gray-400"
             name="postalCode"
             placeholder="Your Postal Code"
-            onChange={handleChange}
           />
           <button
             type="button"
