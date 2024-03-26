@@ -172,8 +172,8 @@ export default function ReservationForm() {
             <option value="81-120">81$ to 120$</option>
             <option value="121-and-more">121$ and More</option>
           </select>
-          {/* <div className="flex flex-wrap">
-            <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4">
+          {/* <div className="flex flex-wrap"> */}
+            {/* <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4">
               <input
                 type="checkbox"
                 name="sunroof"
@@ -212,8 +212,8 @@ export default function ReservationForm() {
                 onChange={handleCheckboxChange}
               />
               <span className="mr-2">Backup Camera</span>
-            </label>
-          </div> */}
+            </label> */}
+          {/* </div> */}
           <button
             type="submit"
             className="cursor-pointer rounded-lg bg-sky-900 px-6 py-2 font-bold text-white hover:bg-sky-950"

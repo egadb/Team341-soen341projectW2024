@@ -76,31 +76,27 @@ export default function FormWrapper(actions: any) {
                         {searchParams.get("pickupDate")}
                       </h1>
                     </div>
-                  </div>
-                  <div className="flex flex-row items-center justify-between">
-                    <div className="flex w-fit flex-row items-center rounded-lg bg-green-100 p-2 text-xl font-bold text-green-500">
-                      <div className="text-2xl">
-                        <MdAttachMoney />
+                    </div>
+                    <div className="flex flex-row justify-between items-center">
+                      <div className="flex flex-row items-center w-fit p-2 rounded-lg text-xl font-bold text-green-500 bg-green-100">
+                        <div className="text-2xl">
+                          <MdAttachMoney />
+                        </div>
+                        {createItem.price}/day
                       </div>
-                      {createItem.price}/day
+                      <div>
+                        <h1 className="text-lg">
+                          <span className="font-bold">To: </span>{searchParams.get("returnDate")}
+                        </h1>
+                      </div>
                     </div>
-                    <div>
-                      <h1 className="text-lg">
-                        <span className="font-bold">To: </span>
-                        {searchParams.get("returnDate")}
-                      </h1>
+                    <div className="w-fit text-xl flex flex-row items-center font-bold gap-1 p-2 bg-rose-100 rounded-lg">
+                      <div>{searchParams.get("location")}</div>
+                      <div className=""><FaLocationDot /></div>
                     </div>
-                  </div>
-                  <div className="flex w-fit flex-row items-center gap-1 rounded-lg bg-rose-100 p-2 text-xl font-bold">
-                    <div>{searchParams.get("location")}</div>
-                    <div className="">
-                      <FaLocationDot />
-                    </div>
-                  </div>
-                  <h1 className="text-lg">
-                    <span className="font-bold">Additional Features: </span>{" "}
-                    {additionalFeaturesArr?.join(", ")}
-                  </h1>
+                    {/* <h1 className="text-lg">
+                      <span className="font-bold">Additional Features: </span> {additionalFeaturesArr?.join(", ")}
+                    </h1> */}
                 </div>
               </div>
               <div className="ml-6 flex flex-row items-center justify-between">
