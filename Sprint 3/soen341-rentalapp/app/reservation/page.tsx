@@ -91,8 +91,9 @@ export default function ReservationForm() {
       const minDuration = Math.min(...durations.map(duration => parseInt(duration)));
       const minDurationIndex = durations.findIndex(duration => parseInt(duration) === minDuration);
       const minDurationName = `duration${minDurationIndex + 1}`;
+      const nearestBranch = minDurationName === "duration1" ? "Montreal" : minDurationName === "duration2" ? "Laval" : "West Island";
 
-      alert(duration1 + " to Montreal Branch\n" + duration2 + " to Laval Branch\n" + duration3 + " to West Island Branch\n" + minDurationName);
+      alert(duration1 + " to Montreal Branch\n" + duration2 + " to Laval Branch\n" + duration3 + " to West Island Branch\n\n" + "The nearest branch is located in: " + nearestBranch);
     }
 
     catch (error) {
