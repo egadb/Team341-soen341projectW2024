@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@googlemaps/google-maps-services-js": "^3.3.42",
-    "axios": "^1.6.8",
-    "nodemailer": "^6.9.13"
-  }
-}
