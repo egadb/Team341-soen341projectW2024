@@ -2,21 +2,20 @@
 
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
+import PostalCodeForm from "@/components/reservation/PostalCodeForm";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import { handleSearch } from "@/lib/actions/mapAPI";
 
-  // const client = new Client({});
-  // const response = client.distancematrix({
-  //   params: {
-  //     origins: ["Montreal"],
-  //     destinations: ["Laval"],
-  //   },
-  // });
-  // console.log(response);
+// const client = new Client({});
+// const response = client.distancematrix({
+//   params: {
+//     origins: ["Montreal"],
+//     destinations: ["Laval"],
+//   },
+// });
+// console.log(response);
 
 export default function ReservationForm() {
-  
   const [location, setLocation] = useState("");
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
@@ -24,6 +23,7 @@ export default function ReservationForm() {
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [additionalFeatures, setAdditionalFeatures] = useState<string[]>([]);
+
   const router = useRouter();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -51,6 +51,7 @@ export default function ReservationForm() {
         break;
     }
   };
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
     if (checked) {
@@ -77,17 +78,17 @@ export default function ReservationForm() {
   //     const response1 = await axios.get(
   //     `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
   //     const duration1 = response1.data.rows[0].elements[0].duration.text;
-      
+
   //     //Time from Laval branch
   //     const response2 = await axios.get(
   //     `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch2}&key=${key}`)
   //     const duration2 = response2.data.rows[0].elements[0].duration.text;
-      
+
   //     //Time from West Island branch
   //     const response3 = await axios.get(
   //     `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch3}&key=${key}`)
   //     const duration3 = response3.data.rows[0].elements[0].duration.text;
-      
+
   //     //Find nearest branch
   //     const durations = [duration1, duration2, duration3];
   //     const minDuration = Math.min(...durations.map(duration => parseInt(duration)));
@@ -150,25 +151,9 @@ export default function ReservationForm() {
     <div className="grid h-screen place-items-center bg-sky-100">
       <div className="rounded-lg border-t-4 border-sky-900 bg-slate-100 p-5 shadow-lg">
         <h1 className="my-4 text-4xl font-bold">Reservation</h1>
-        <Provider formAction={handleSearch}>
-        <Spinner />
-          <input
-          type="text"
-          className="rounded-md border-2 p-3 text-gray-400"
-          name="postalCode"
-          placeholder="Enter a Location"
-        />
-        <button
-          type="button"
-          className="cursor-pointer rounded-lg bg-sky-900 px-6 py-2 font-bold text-white hover:bg-sky-950"
-          onClick={handleSearch}
-        >
-          Search Nearest Branch
-        </button>
-        </Provider>
-        
+        <PostalCodeForm></PostalCodeForm>
         <Provider formAction={handleSubmit}>
-          <Spinner />       
+          <Spinner />
           {/* <input
             type="text"
             className="rounded-md border-2 p-3 text-gray-400"
