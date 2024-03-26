@@ -2,8 +2,18 @@
 
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
+import PostalCodeForm from "@/components/reservation/PostalCodeForm";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
+
+// const client = new Client({});
+// const response = client.distancematrix({
+//   params: {
+//     origins: ["Montreal"],
+//     destinations: ["Laval"],
+//   },
+// });
+// console.log(response);
 
 export default function ReservationForm() {
   const [location, setLocation] = useState("");
@@ -13,6 +23,7 @@ export default function ReservationForm() {
   const [category, setCategory] = useState("");
   const [priceRange, setPriceRange] = useState("");
   const [additionalFeatures, setAdditionalFeatures] = useState<string[]>([]);
+
   const router = useRouter();
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -40,6 +51,7 @@ export default function ReservationForm() {
         break;
     }
   };
+
   const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value, checked } = event.target;
     if (checked) {
@@ -48,6 +60,51 @@ export default function ReservationForm() {
       setAdditionalFeatures(additionalFeatures.filter((feature) => feature !== value));
     }
   };
+
+  // const handleSearch = async () => {
+
+  //   const postalCode = (document.getElementsByName("postalCode")[0] as HTMLInputElement).value;
+  //   const key = process.env.GOOGLE_API_KEY;
+  //   console.log(key);
+  //   const pcBranch1 = "H4Y1H1";
+  //   const pcBranch2 = "H7T2Y5";
+  //   const pcBranch3 = "H9R5J2";
+
+  //   //In order to use the "Search Nearest Branch" feature, assuming Google Chrome is being used, one will need to install the "Allow CORS: Access-Control-Allow-Origin" extension and enable it.
+
+  //   try {
+
+  //     //Time from Montreal branch
+  //     const response1 = await axios.get(
+  //     `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
+  //     const duration1 = response1.data.rows[0].elements[0].duration.text;
+
+  //     //Time from Laval branch
+  //     const response2 = await axios.get(
+  //     `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch2}&key=${key}`)
+  //     const duration2 = response2.data.rows[0].elements[0].duration.text;
+
+  //     //Time from West Island branch
+  //     const response3 = await axios.get(
+  //     `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch3}&key=${key}`)
+  //     const duration3 = response3.data.rows[0].elements[0].duration.text;
+
+  //     //Find nearest branch
+  //     const durations = [duration1, duration2, duration3];
+  //     const minDuration = Math.min(...durations.map(duration => parseInt(duration)));
+  //     const minDurationIndex = durations.findIndex(duration => parseInt(duration) === minDuration);
+  //     const minDurationName = `duration${minDurationIndex + 1}`;
+  //     const nearestBranch = minDurationName === "duration1" ? "Montreal" : minDurationName === "duration2" ? "Laval" : "West Island";
+
+  //     alert(duration1 + " to Montreal Branch\n" + duration2 + " to Laval Branch\n" + duration3 + " to West Island Branch\n\n" + "The nearest branch is located in: " + nearestBranch);
+  //   }
+
+  //   catch (error) {
+  //     console.error(error);
+  //   }
+
+  // };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.currentTarget);
     const newLocation = formData.get("location") as string;
@@ -94,8 +151,22 @@ export default function ReservationForm() {
     <div className="grid h-screen place-items-center bg-sky-100">
       <div className="rounded-lg border-t-4 border-sky-900 bg-slate-100 p-5 shadow-lg">
         <h1 className="my-4 text-4xl font-bold">Reservation</h1>
+        <PostalCodeForm></PostalCodeForm>
         <Provider formAction={handleSubmit}>
           <Spinner />
+          {/* <input
+            type="text"
+            className="rounded-md border-2 p-3 text-gray-400"
+            name="postalCode"
+            placeholder="Enter a Location"
+          />
+          <button
+            type="button"
+            className="cursor-pointer rounded-lg bg-sky-900 px-6 py-2 font-bold text-white hover:bg-sky-950"
+            onClick={handleSearch}
+          >
+            Search Nearest Branch
+          </button> */}
           <select
             id="locationDropdown"
             className="rounded-md border-2 p-3 text-gray-400"
@@ -106,9 +177,9 @@ export default function ReservationForm() {
             <option value="" disabled selected>
               Select a Location
             </option>
-            <option value="Montreal">Montreal</option>
-            <option value="Laval">Laval</option>
-            <option value="West-Island">West Island</option>
+            <option value="Montreal">Montreal (H4Y 1H1) </option>
+            <option value="Laval">Laval (H7T 2Y5) </option>
+            <option value="West-Island">West Island (H9R 5J2) </option>
           </select>
           Pickup Date
           <input
