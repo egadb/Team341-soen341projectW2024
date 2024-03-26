@@ -68,9 +68,10 @@ export default function ReservationForm() {
     const pcBranch2 = "H7T2Y5";
     const pcBranch3 = "H9R5J2";
 
-    //In order for this feature to work, assuming Google Chrome is being used, one will need to install the "Allow CORS: Access-Control-Allow-Origin" extension and enable it.
+    //In order for the "Search Nearest Branch" feature to work, assuming Google Chrome is being used, one will need to install the "Allow CORS: Access-Control-Allow-Origin" extension and enable it.
 
     try {
+      
       //Time from Montreal branch
       const response1 = await axios.get(
       `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch1}&key=${key}`)
