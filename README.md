@@ -60,6 +60,7 @@ Here is a list of steps to take to run the project.
       pnpm run dev
      ```
    - Open your localhost, and you're done!
+   - It is to note that in order to use the "Search Nearest Branch" feature, assuming Google Chrome is being used, one will need to install the "Allow CORS: Access-Control-Allow-Origin" extension and enable it.
 
    ## Git Rules
 
