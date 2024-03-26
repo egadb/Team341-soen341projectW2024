@@ -67,6 +67,15 @@ export default async function ProvidePaymentInfo({
             key={"extraFeatures"}
             readOnly
           />
+          <input
+            type="text"
+            className="hidden"
+            name={"price"}
+            placeholder={"price"}
+            defaultValue={searchParams.price}
+            key={"price"}
+            readOnly
+          />
 
           <input
             type="text"

@@ -49,8 +49,7 @@ export async function createReservationUser(prevState: any, formData: FormData) 
     formData.get("userID") &&
     formData.get("vehicleID") &&
     formData.get("pickupDate") &&
-    formData.get("endDate") &&
-    formData.get("price")
+    formData.get("endDate")
   );
 
   if (isValid) {
@@ -63,7 +62,6 @@ export async function createReservationUser(prevState: any, formData: FormData) 
     let endDate = formData.get("endDate")?.toString();
     let extraFeatures = formData.get("extraFeatures")?.toString();
     let price = formData.get("price")?.toString();
-
     const newReservation = new Reservation({
       userID,
       vehicleID,
@@ -72,13 +70,13 @@ export async function createReservationUser(prevState: any, formData: FormData) 
       extraFeatures,
       price,
     });
-    console.log("newReservation", newReservation);
     const emailFormData = new FormData();
     emailFormData.append("userID", newReservation.userID);
     emailFormData.append("vehicleID", newReservation.vehicleID);
     emailFormData.append("pickupDate", newReservation.pickupDate);
     emailFormData.append("endDate", newReservation.endDate);
     emailFormData.append("id", newReservation._id);
+    emailFormData.append("price", newReservation.price);
     emailFormData.append("email", email);
 
     try {
@@ -95,7 +93,6 @@ export async function createReservationUser(prevState: any, formData: FormData) 
       console.log(err);
       throw new Error("Failed to send email");
     }
-    //redirect("/myReservations");
   }
 }
 
