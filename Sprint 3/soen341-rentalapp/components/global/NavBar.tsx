@@ -38,6 +38,7 @@ export default function NavBar({ session }: any) {
         {session && <NavBarButton name="Reserve" path="/reservation" />}
         {session && <NavBarButton name="Time To Pick Up!" path="/checkIn" />}
         {!session && <NavBarButton name="My Reservations" path="/myReservations" />}
+        {session && <NavBarButton name="Time To Drop Off!" path="/checkOut" />}
         <div className="p-4">
           {session && (
             <button

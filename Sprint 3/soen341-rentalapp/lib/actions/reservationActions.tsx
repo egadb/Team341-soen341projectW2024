@@ -13,7 +13,8 @@ export async function createReservation(prevState: any, formData: FormData) {
     formData.get("vehicleID") &&
     formData.get("pickupDate") &&
     formData.get("endDate") &&
-    formData.get("extraFeatures")
+    formData.get("extraFeatures") &&
+    formData.get("price")
   );
 
   if (isValid) {
@@ -24,6 +25,7 @@ export async function createReservation(prevState: any, formData: FormData) {
     let pickupDate = formData.get("pickupDate")?.toString();
     let endDate = formData.get("endDate")?.toString();
     let extraFeatures = formData.get("extraFeatures")?.toString();
+    let price = formData.get("price")?.toString();
 
     const newReservation = new Reservation({
       userID,
@@ -31,6 +33,7 @@ export async function createReservation(prevState: any, formData: FormData) {
       pickupDate,
       endDate,
       extraFeatures,
+      price,
     });
 
     try {
@@ -46,41 +49,50 @@ export async function createReservationUser(prevState: any, formData: FormData) 
     formData.get("userID") &&
     formData.get("vehicleID") &&
     formData.get("pickupDate") &&
-    formData.get("endDate") &&
-    formData.get("extraFeatures")
+    formData.get("endDate")
   );
-
+  console.log("isValid " + isValid);
   if (isValid) {
     await connectMongoDB();
-    let userID = formData.get("userID")?.toString();
-    const user = await User.findOne({ email: userID });
-    userID = user._id;
+    let email = formData.get("userID")?.toString() || "null";
+    const user = await User.findOne({ email: email });
+    let userID = user._id;
     let vehicleID = formData.get("vehicleID")?.toString();
     let pickupDate = formData.get("pickupDate")?.toString();
     let endDate = formData.get("endDate")?.toString();
     let extraFeatures = formData.get("extraFeatures")?.toString();
-
+    let price = formData.get("price")?.toString();
     const newReservation = new Reservation({
       userID,
       vehicleID,
       pickupDate,
       endDate,
       extraFeatures,
+      price,
     });
-    console.log("newReservation", newReservation);
-    const formData1 = new FormData();
-    formData1.append("reservation", newReservation);
+    const emailFormData = new FormData();
+    emailFormData.append("userID", newReservation.userID);
+    emailFormData.append("vehicleID", newReservation.vehicleID);
+    emailFormData.append("pickupDate", newReservation.pickupDate);
+    emailFormData.append("endDate", newReservation.endDate);
+    emailFormData.append("id", newReservation._id);
+    emailFormData.append("price", newReservation.price);
+    emailFormData.append("email", email);
 
     try {
       await newReservation.save();
-      await fetch("/api/email", {
-        method: "post",
-        body: formData1,
-      });
     } catch (err: any) {
       throw new Error("Failed to create reservation");
     }
-    //redirect("/myReservations");
+    try {
+      await fetch("http://localhost:3000/api/email", {
+        method: "post",
+        body: emailFormData,
+      });
+    } catch (err: any) {
+      console.log(err);
+      throw new Error("Failed to send email");
+    }
   }
 }
 
@@ -91,7 +103,8 @@ export async function updateReservation(prevState: any, formData: FormData) {
     formData.get("vehicleID") &&
     formData.get("pickupDate") &&
     formData.get("endDate") &&
-    formData.get("extraFeatures")
+    formData.get("extraFeatures") &&
+    formData.get("price")
   );
 
   if (isValid) {
@@ -102,6 +115,7 @@ export async function updateReservation(prevState: any, formData: FormData) {
     const pickupDate = formData.get("pickupDate")?.toString();
     const endDate = formData.get("endDate")?.toString();
     const extraFeatures = formData.get("extraFeatures")?.toString();
+    const price = formData.get("price")?.toString();
 
     try {
       const reservation = await Reservation.findByIdAndUpdate(_id, {
@@ -110,6 +124,7 @@ export async function updateReservation(prevState: any, formData: FormData) {
         pickupDate,
         endDate,
         extraFeatures,
+        price,
       });
       await reservation.save();
     } catch (err: any) {
@@ -139,10 +154,11 @@ export async function getAllReservations(searchParams: { [key: string]: string |
       pickupDate: reservation.pickupDate.toString(),
       endDate: reservation.endDate.toString(),
       extraFeatures: reservation.extraFeatures,
+      price: reservation.price,
     }));
     return { reservations: reservationArray, count, totalPage };
   } catch (err: any) {
-    throw new Error("Failed to get reservations");
+    throw new Error("Failed to get all reservations");
   }
 }
 
@@ -161,10 +177,11 @@ export async function getUserReservations(userEmail: string) {
       pickupDate: reservation.pickupDate.toString(),
       endDate: reservation.endDate.toString(),
       extraFeatures: reservation.extraFeatures,
+      price: reservation.price.toString(),
     }));
     return { reservations: reservationArray, count };
   } catch (err: any) {
-    throw new Error("Failed to get reservations");
+    throw new Error("Failed to get user reservations");
   }
 }
 

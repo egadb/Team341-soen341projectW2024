@@ -105,7 +105,7 @@ export default function availabilityAndPrice({
   const onConfirm = () => {
     router.push(
       `/providePaymentPage?vehicleID=${vehicleID}&pickupDate=${dateOfPickup.toString()}&endDate=${dateOfDropoff.toString()}
-       &extraFeatures=${featuresStr}&branch=${chosenBranch}&price =${reservationDuration * Number(carPrice) + additionalPrice}`
+       &extraFeatures=${featuresStr}&branch=${chosenBranch}&price=${reservationDuration * Number(carPrice) + additionalPrice}`
     );
   };
   const checkAdditionalFeaturesAndTotalPrice = (features: string[]) => {

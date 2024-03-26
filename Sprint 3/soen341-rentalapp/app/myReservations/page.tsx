@@ -21,6 +21,7 @@ export default async function myReservations() {
               <th>pickupDate</th>
               <th>endDate</th>
               <th>extraFeatures</th>
+              <th>price</th>
             </tr>
           </thead>
           <tbody>

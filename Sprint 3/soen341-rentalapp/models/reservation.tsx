@@ -27,7 +27,10 @@ const reservationSchema = new Schema(
     extraFeatures: {
       type: String,
       default: "",
-      required: true,
+    },
+    price: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }
