@@ -51,7 +51,7 @@ export async function createReservationUser(prevState: any, formData: FormData) 
     formData.get("pickupDate") &&
     formData.get("endDate")
   );
-
+  console.log("isValid " + isValid);
   if (isValid) {
     await connectMongoDB();
     let email = formData.get("userID")?.toString() || "null";

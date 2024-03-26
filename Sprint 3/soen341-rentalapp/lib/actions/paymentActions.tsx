@@ -1,4 +1,5 @@
 "use server";
+import { redirect } from "next/navigation";
 import { createReservationUser } from "./reservationActions";
 const validateInfo = (cardNumber: string, expiryDate: string, cvv: string) => {
   const cardNumberRegex = /^[0-9]{13,16}$/;
@@ -31,5 +32,5 @@ export async function handlePayment(prevState: any, formData: FormData) {
     return alert("Invalid payment information");
   }
   createReservationUser(null, formData);
-  //   confirmation();
+  redirect("/");
 }
