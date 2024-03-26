@@ -68,7 +68,7 @@ export default function ReservationForm() {
     const pcBranch2 = "H7T2Y5";
     const pcBranch3 = "H9R5J2";
 
-    //In order for the "Search Nearest Branch" feature to work, assuming Google Chrome is being used, one will need to install the "Allow CORS: Access-Control-Allow-Origin" extension and enable it.
+    //In order to use the "Search Nearest Branch" feature, assuming Google Chrome is being used, one will need to install the "Allow CORS: Access-Control-Allow-Origin" extension and enable it.
 
     try {
 
