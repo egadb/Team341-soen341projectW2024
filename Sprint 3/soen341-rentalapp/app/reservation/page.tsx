@@ -85,8 +85,14 @@ export default function ReservationForm() {
       const response3 = await axios.get(
       `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${postalCode}&destinations=${pcBranch3}&key=${key}`)
       const duration3 = response3.data.rows[0].elements[0].duration.text;
+      
+      //Find nearest branch
+      const durations = [duration1, duration2, duration3];
+      const minDuration = Math.min(...durations.map(duration => parseInt(duration)));
+      const minDurationIndex = durations.findIndex(duration => parseInt(duration) === minDuration);
+      const minDurationName = `duration${minDurationIndex + 1}`;
 
-      alert(duration1 + " to Montreal Branch\n" + duration2 + " to Laval Branch\n" + duration3 + " to West Island Branch")
+      alert(duration1 + " to Montreal Branch\n" + duration2 + " to Laval Branch\n" + duration3 + " to West Island Branch\n" + minDurationName);
     }
 
     catch (error) {
