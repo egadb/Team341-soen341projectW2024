@@ -155,7 +155,7 @@ export default function ReservationForm() {
             type="text"
             className="rounded-md border-2 p-3 text-gray-400"
             name="postalCode"
-            placeholder="Your Postal Code"
+            placeholder="Enter a Location"
           />
           <button
             type="button"
