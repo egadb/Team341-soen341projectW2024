@@ -6,11 +6,13 @@ const nodemailer = require("nodemailer");
 export async function POST(request: NextRequest) {
   const username = process.env.NEXT_PUBLIC_EMAIL_USERNAME;
   const password = process.env.NEXT_PUBLIC_EMAIL_PASSWORD;
-  const myEmail = process.env.NEXT_PUBLIC_PERSONAL_EMAIL;
 
   const formData = await request.formData();
-  const reservation = formData.get("reservation");
-  console.log("alo", reservation);
+  const reservationID = await formData.get("id")?.toString();
+  const pickupDate = await formData.get("pickupDate")?.toString();
+  const endDate = await formData.get("endDate")?.toString();
+
+  const email = await formData.get("email");
 
   const transporter = nodemailer.createTransport({
     service: "Gmail",
@@ -25,13 +27,13 @@ export async function POST(request: NextRequest) {
   try {
     const mail = await transporter.sendMail({
       from: username,
-      to: myEmail,
+      to: email,
       subject: `Your car reservation has been confirmed!`,
       html: `
-            <p>Booking Number: </p>
-            <p>Pickup Date:  </p>
-            <p>Dropoff Date:  </p>
-            <p>Location of pickup and dropoff:  </p>
+            <p>Booking Number: ${reservationID}</p>
+            <p>Pickup Date:  ${pickupDate}</p>
+            <p>Dropoff Date:  ${endDate}</p>
+            <p>Location of pickup and dropoff:  Montreal</p>
 
             <p>Thank you for using Rent-A-Koenigsegg! 🚗🤝</p>
             `,

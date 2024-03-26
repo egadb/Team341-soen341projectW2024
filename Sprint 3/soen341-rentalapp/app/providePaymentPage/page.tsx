@@ -1,79 +1,73 @@
-"use client";
-
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
-import { createReservationUser } from "@/lib/actions/reservationActions";
+import { handlePayment } from "@/lib/actions/paymentActions";
+import { getUserSession } from "@/lib/session";
 
-export default function ProvidePaymentInfo({
+export default async function ProvidePaymentInfo({
   params,
   searchParams,
 }: {
   params: { slug: string };
   searchParams: { [key: string]: string | undefined };
 }) {
-  const formData = new FormData();
-  // const session = await getUserSession();
+  const session = await getUserSession();
 
-  const validateInfo = (cardNumber: string, expiryDate: string, cvv: string) => {
-    const cardNumberRegex = /^[0-9]{13,16}$/;
-    const expiryDateRegex = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
-    const cvvRegex = /^[0-9]{3,4}$/;
-
-    const isValidCardNumber = cardNumberRegex.test(cardNumber.replace(/\s/g, ""));
-    const isValidExpiryDate = expiryDateRegex.test(expiryDate);
-    const isValidCVV = cvvRegex.test(cvv);
-
-    return {
-      isValidCardNumber,
-      isValidExpiryDate,
-      isValidCVV,
-    };
-  };
-  const confirmation = async () => {
-    alert("Payment information confirmed! An email has been sent to you!");
-    const response = await fetch("/api/email", {
-      method: "post",
-      body: formData,
-    });
-    //need to send email
-    //send booking number, pickup date, return date, location
-  };
-  const handleConfirm = async () => {
-    const cardNumber =
-      (document.querySelector('input[name="cardNumber"]') as HTMLInputElement)?.value || "";
-    const expiryDate =
-      (document.querySelector('input[name="expiryDate"]') as HTMLInputElement)?.value || "";
-    const cvv = (document.querySelector('input[name="cvv"]') as HTMLInputElement)?.value || "";
-
-    const { isValidCardNumber, isValidExpiryDate, isValidCVV } = validateInfo(
-      cardNumber,
-      expiryDate,
-      cvv
-    );
-
-    if (!isValidCardNumber || !isValidExpiryDate || !isValidCVV) {
-      alert("Invalid payment information");
-      return;
-    }
-
-    // Proceed with form submission
-    for (const key in searchParams) {
-      if (searchParams.hasOwnProperty(key)) {
-        const value = searchParams[key] || "";
-        formData.append(key, value);
-      }
-    }
-    // formData.append("userID", session?.user?.email as string);
-    createReservationUser(params.slug, formData);
-    confirmation();
-  };
+  // const confirmation = async () => {
+  //   alert("Payment information confirmed! An email has been sent to you!");
+  // };
 
   return (
     <div className="grid h-screen place-items-center bg-sky-100">
       <div className="rounded-lg border-t-4 border-sky-900 bg-slate-100 p-5 shadow-lg">
         <h1 className="my-4 text-4xl font-bold">Provide Payment Information</h1>
-        <Provider formAction={handleConfirm}>
+        <Provider formAction={handlePayment}>
           <Spinner />
+          <input
+            type="text"
+            className="hidden"
+            name={"vehicleID"}
+            placeholder={"vehicleID"}
+            defaultValue={searchParams.vehicleID}
+            key={"vehicleID"}
+            readOnly
+          />
+          <input
+            type="text"
+            className="hidden"
+            name={"userID"}
+            placeholder={"userID"}
+            defaultValue={session?.user?.email}
+            key={"userID"}
+            readOnly
+          />
+          <input
+            type="text"
+            className="hidden"
+            name={"pickupDate"}
+            placeholder={"pickupDate"}
+            defaultValue={searchParams.pickupDate}
+            key={"pickupDate"}
+            readOnly
+          />
+          <input
+            type="text"
+            className="hidden"
+            name={"endDate"}
+            placeholder={"endDate"}
+            defaultValue={searchParams.endDate}
+            key={"endDate"}
+            readOnly
+          />
+          <input
+            type="text"
+            className="hidden"
+            name={"extraFeatures"}
+            placeholder={"extraFeatures"}
+            defaultValue={searchParams.extraFeatures}
+            key={"extraFeatures"}
+            readOnly
+          />
+
           <input
             type="text"
             className="rounded-md border-2 p-3 text-gray-400"

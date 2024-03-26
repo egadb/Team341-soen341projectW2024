@@ -46,15 +46,14 @@ export async function createReservationUser(prevState: any, formData: FormData) 
     formData.get("userID") &&
     formData.get("vehicleID") &&
     formData.get("pickupDate") &&
-    formData.get("endDate") &&
-    formData.get("extraFeatures")
+    formData.get("endDate")
   );
 
   if (isValid) {
     await connectMongoDB();
-    let userID = formData.get("userID")?.toString();
-    const user = await User.findOne({ email: userID });
-    userID = user._id;
+    let email = formData.get("userID")?.toString() || "null";
+    const user = await User.findOne({ email: email });
+    let userID = user._id;
     let vehicleID = formData.get("vehicleID")?.toString();
     let pickupDate = formData.get("pickupDate")?.toString();
     let endDate = formData.get("endDate")?.toString();
@@ -68,17 +67,27 @@ export async function createReservationUser(prevState: any, formData: FormData) 
       extraFeatures,
     });
     console.log("newReservation", newReservation);
-    const formData1 = new FormData();
-    formData1.append("reservation", newReservation);
+    const emailFormData = new FormData();
+    emailFormData.append("userID", newReservation.userID);
+    emailFormData.append("vehicleID", newReservation.vehicleID);
+    emailFormData.append("pickupDate", newReservation.pickupDate);
+    emailFormData.append("endDate", newReservation.endDate);
+    emailFormData.append("id", newReservation._id);
+    emailFormData.append("email", email);
 
     try {
       await newReservation.save();
-      await fetch("/api/email", {
-        method: "post",
-        body: formData1,
-      });
     } catch (err: any) {
       throw new Error("Failed to create reservation");
+    }
+    try {
+      await fetch("http://localhost:3000/api/email", {
+        method: "post",
+        body: emailFormData,
+      });
+    } catch (err: any) {
+      console.log(err);
+      throw new Error("Failed to send email");
     }
     //redirect("/myReservations");
   }
