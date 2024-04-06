@@ -17,7 +17,6 @@ function NavBarButton({ name, path }: NavBarButtonProps) {
     </div>
   );
 }
-
 export default async function NavBar({ session }: any) {
   return (
     <div
@@ -38,13 +37,15 @@ export default async function NavBar({ session }: any) {
         {session && <NavBarButton name="Reserve" path="/reservation" />}
         <div className="p-4">
           {session && (
-            <button
-              className="rounded-md bg-green-600 px-4 py-2 font-bold text-white"
-              name="Logout"
-              onClick={() => signOut()}
-            >
-              Logout
-            </button>
+            <Link href={"/"}>
+              <button
+                className="rounded-md bg-green-600 px-4 py-2 font-bold text-white"
+                name="Logout"
+                onClick={() => signOut()}
+              >
+                Logout
+              </button>
+            </Link>
           )}
         </div>
       </nav>

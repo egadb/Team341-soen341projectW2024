@@ -5,6 +5,7 @@ import { getAllVehicles } from "@/lib/actions/vehicleCRUD";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import QuizModal from "./QuizModal";
 
 export default function availabilityAndPrice({
   params,
@@ -29,6 +30,9 @@ export default function availabilityAndPrice({
   const [hasGPS, setHasGPS] = useState(false);
   const [hasWifi, setHasWifi] = useState(false);
   const [additionalPrice, setAdditionalPrice] = useState(0);
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
+  const [isQuizDone, setIsQuizDone] = useState(false);
+  const [discount, setDiscount] = useState(0);
   useEffect(() => {
     const fetchVehicle = () => {
       return getAllVehicles({})
@@ -78,6 +82,16 @@ export default function availabilityAndPrice({
       setIsAvailable(available); // Update the availability state once
     }
   };
+  const openModal = () => {
+    setIsQuizOpen(true);
+  };
+  const closeModal = () => {
+    setIsQuizOpen(false);
+  };
+  const giveDiscount = () => {
+    const discount = (reservationDuration * Number(carPrice) + additionalPrice) * 0.1;
+    setDiscount(discount);
+  };
 
   const vehicleID = searchParams["carId"] || "";
   const dateOfPickup = new Date(searchParams["pickupDate"] || "");
@@ -100,7 +114,6 @@ export default function availabilityAndPrice({
   const featuresArr: string[] = featuresStr?.split(",") ?? [];
   const carPrice = vehicle?.price;
   const pictureUrl = vehicle?.pictureURL;
-  //if (!session) return <div>Session Expired! Please Log In</div>;
   const router = useRouter();
   const onConfirm = () => {
     router.push(
@@ -181,9 +194,13 @@ export default function availabilityAndPrice({
                 </tr>
               )}
               <tr>
+                <td className="py-2">Discount</td>
+                <td className="py-2">-{discount}$</td>
+              </tr>
+              <tr>
                 <td className="py-2">Total</td>
                 <td className="py-2">
-                  {reservationDuration * Number(carPrice) + additionalPrice}$
+                  {reservationDuration * Number(carPrice) + additionalPrice - discount}$
                 </td>
               </tr>
             </tbody>
@@ -192,10 +209,14 @@ export default function availabilityAndPrice({
       </div>
 
       <div className="mt-10 flex flex-col items-center justify-center">
+        {!isQuizDone && (
+          <button onClick={openModal} className="rounded bg-blue-500 px-4 py-2 text-white">
+            Take a Quiz for a Chance to Earn a 10% Discount!
+          </button>
+        )}
         <img src={pictureUrl} className="h-auto w-1/4" />
         <div className="mt-4 flex justify-center">
-          <Link href={"/"}>
-            {/*goes back to home page for now, fix this*/}
+          <Link href={"/reservation"}>
             <button className="rounded bg-red-500 px-4 py-2 text-white">Go Back</button>
           </Link>
           <button onClick={onConfirm} className="ml-4 rounded bg-green-500 px-4 py-2 text-white">
@@ -203,13 +224,18 @@ export default function availabilityAndPrice({
           </button>
         </div>
       </div>
+      <QuizModal
+        isOpen={isQuizOpen}
+        onClose={closeModal}
+        setDiscount={giveDiscount}
+        quizDone={setIsQuizDone}
+      />
     </div>
   ) : (
     <div className="grid h-screen place-items-center bg-sky-100">
-      <Link href={"/"}>
+      <Link href={"/reservation"}>
         <div className="flex flex-col items-center">
           <div>Car is not available!</div>
-          {/*goes back to home page for now, fix this*/}
           <button className="mt-4 rounded bg-red-500 px-4 py-2 text-white">Go Back</button>
         </div>
       </Link>
