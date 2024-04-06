@@ -141,9 +141,9 @@ export default function availabilityAndPrice({
   };
   return isAvailable ? (
     <div className="h-screen bg-sky-100">
-      <div className="ml-40 flex justify-center">
-        <div className="w-1/2">
-          <table className="mt-20 w-full">
+      <div className="flex justify-center p-20">
+        <div className="mr-40 flex w-1/2 items-center justify-center rounded-lg border border-gray-600 bg-white p-4">
+          <table className="w-full">
             <tbody>
               <tr>
                 <td className="py-2 text-4xl font-bold">Reservation Details</td>
@@ -164,8 +164,9 @@ export default function availabilityAndPrice({
             </tbody>
           </table>
         </div>
-        <div className="w-1/2">
-          <table className="mt-20 w-full">
+
+        <div className="flex w-1/2 items-center justify-center rounded-lg border border-gray-600 bg-white p-4">
+          <table className="w-full">
             <tbody>
               <tr>
                 <td className="py-2 text-4xl font-bold">Expense Category</td>
@@ -208,7 +209,7 @@ export default function availabilityAndPrice({
         </div>
       </div>
 
-      <div className="mt-10 flex flex-col items-center justify-center">
+      <div className="mt-0 flex flex-col items-center justify-center">
         {!isQuizDone && (
           <button onClick={openModal} className="rounded bg-blue-500 px-4 py-2 text-white">
             Take a Quiz for a Chance to Earn a 10% Discount!
