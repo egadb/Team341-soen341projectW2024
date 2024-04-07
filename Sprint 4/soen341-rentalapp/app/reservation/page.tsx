@@ -3,6 +3,7 @@
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
 import PostalCodeForm from "@/components/reservation/PostalCodeForm";
+import { getUserSession } from "@/lib/session";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
@@ -15,7 +16,9 @@ import { ChangeEvent, useState } from "react";
 // });
 // console.log(response);
 
-export default function ReservationForm() {
+export default async function ReservationForm() {
+
+  
   const [location, setLocation] = useState("");
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
@@ -147,6 +150,7 @@ export default function ReservationForm() {
     );
   };
 
+  
   return (
     <div className="grid h-screen place-items-center bg-sky-100">
       <div className="rounded-lg border-t-4 border-sky-900 bg-slate-100 p-5 shadow-lg">
