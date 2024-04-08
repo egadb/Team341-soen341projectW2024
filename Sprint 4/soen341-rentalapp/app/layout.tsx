@@ -8,7 +8,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Rent-A-Koenigsegg",
+  title: "Rental341",
   description: "Made by Soen 341",
 };
 
@@ -20,7 +20,7 @@ export default async function RootLayout({
   const session = await getUserSession();
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-sky-100`}>
+      <body className={`${inter.className} bg-sky-100 text-black`}>
         <NavBar session={session} />
         {children}
         <Footer />

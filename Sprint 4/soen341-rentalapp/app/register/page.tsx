@@ -14,28 +14,28 @@ export default function RegisterForm() {
             <Spinner />
             <input
               type="text"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"firstName"}
               placeholder=" First Name"
               required
             />
             <input
               type="text"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"lastName"}
               placeholder=" Last Name"
               required
             />
             <input
               type="text"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"email"}
               placeholder=" Email"
               required
             />
             <input
               type="password"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"password"}
               placeholder=" Password"
               required

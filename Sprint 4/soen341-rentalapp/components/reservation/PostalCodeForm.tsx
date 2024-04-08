@@ -41,7 +41,7 @@ export default function Provider() {
 
       <input
         type="text"
-        className="rounded-md border-2 p-3 text-gray-400"
+        className="rounded-md border-2 p-3 text-gray-400 bg-white"
         name="postalCode"
         placeholder="Enter a Location"
       />

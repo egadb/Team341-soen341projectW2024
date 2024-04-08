@@ -51,21 +51,21 @@ export default async function ReturnForm() {
             </div>
 
             <input
-              className="rounded-lg p-3 shadow-inner"
+              className="rounded-lg p-3 shadow-inner bg-white"
               type="text"
               id="creditCardNumber"
               name="Credit Card Number"
               placeholder="Enter your Credit Card Number"
             />
             <input
-              className="rounded-lg p-3 shadow-inner"
+              className="rounded-lg p-3 shadow-inner bg-white"
               type="text"
               id="expirationDate"
               name="Expiration Date"
               placeholder="MM/YY"
             />
             <input
-              className="rounded-lg p-3 shadow-inner"
+              className="rounded-lg p-3 shadow-inner bg-white"
               type="text"
               id="cvv"
               name="CVV"

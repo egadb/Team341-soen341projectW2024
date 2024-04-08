@@ -17,14 +17,14 @@ export default async function LoginForm() {
             <Spinner />
             <input
               type="text"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="input h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"email"}
               placeholder="Email"
               required
             />
             <input
               type="password"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"password"}
               placeholder="Password"
               required
