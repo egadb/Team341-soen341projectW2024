@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import questions from "./QuizQuestions";
+import questions from "../lib/QuizQuestions";
 
 const QuizModal = ({
   isOpen,

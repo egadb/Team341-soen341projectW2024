@@ -5,7 +5,7 @@ import { getAllVehicles } from "@/lib/actions/vehicleCRUD";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import QuizModal from "./QuizModal";
+import QuizModal from "../../components/QuizModal";
 
 export default function availabilityAndPrice({
   params,
