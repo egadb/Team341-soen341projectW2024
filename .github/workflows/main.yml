@@ -24,6 +24,8 @@ jobs:
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v2.1.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
             
       - name: Install Node.js
         uses: actions/setup-node@v3
