@@ -3,7 +3,6 @@ name: Deployment Workflow
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 # Trigger this workflow on pushes to the specified branch
 on:
@@ -22,9 +21,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2.1.1    
             
       - name: Install Node.js
         uses: actions/setup-node@v3
