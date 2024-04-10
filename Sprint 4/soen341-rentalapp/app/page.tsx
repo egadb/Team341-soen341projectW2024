@@ -12,6 +12,7 @@ import loginIcon from "../public/icons/login.png";
 import confirmIcon from "../public/icons/agreement.png";
 import { InfiniteMovingCards } from "@/components/homepage/infinite-moving-cards";
 import { testimonials } from "@/models/testimonials";
+import Link from "next/link"
 
 
 const kanit = Anton({
@@ -23,22 +24,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col gap-36">
-      {/* <h1 className="text-center text-7xl font-bold text-green-600">
-        Welcome to Rent-A-Koenigsegg
-      </h1>
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-        {vehicles.map((vehicle) => (
-          <VehicleCard key={vehicle.id} vehicle={vehicle} />
-        ))}
-      </div> */}
-
       <div className="flex flex-row justify-center items-center gap-56 mt-28 px-20">
         <div className="flex items-center">
           <div className="flex flex-col gap-10 max-w-3xl bg-blue-100 p-14 rounded-lg">
             <h1 className="font-bold text-7xl">Welcome To <span className={`mr-1 text-7xl`}>Rental</span><span className={`${kanit.className} text-8xl font-bold text-blue-800`}>341</span></h1>
             <p className=" text-xl text-gray-500">Discover seamless travel. Choose from our diverse fleet, book effortlessly, and hit the road with confidence. Your adventure awaits!</p>
             <div className="flex flex-row gap-10">
-              <a href="/register"><button className="flex flex-row gap-2 items-center font-bold text-lg text-slate-200 w-max rounded-md bg-blue-700 hover:bg-blue-600 px-6 py-3">Book Ride <FaRegCheckCircle /></button></a>
+              <Link href={"/register"} className="flex flex-row gap-2 items-center font-bold text-lg text-slate-200 w-max rounded-md bg-blue-700 hover:bg-blue-600 px-6 py-3"> Book Ride <FaRegCheckCircle /> </Link>
               <button className="flex flex-row gap-2 items-center font-bold text-lg text-slate-700 w-max rounded-md border border-blue-700 hover:bg-blue-500 px-6 py-3">Learn More <IoIosArrowForward /></button> 
 
             </div>
@@ -79,7 +71,7 @@ export default function Home() {
           </div>
         </div>
         <div className="mt-12">
-        <a href="/register"><button className="flex flex-row items-center px-12 font-bold text-xl bg-blue-700 hover:bg-blue-600 text-slate-100 rounded-lg"> I'm Ready! <Lottie className=" max-w-20" animationData={animationData2}/></button></a>
+        <Link href="/register" className="flex flex-row items-center px-12 font-bold text-xl bg-blue-700 hover:bg-blue-600 text-slate-100 rounded-lg">I'm Ready! <Lottie className=" max-w-20" animationData={animationData2}/></Link>
         </div>
       </div>
       <div className="flex flex-col items-center gap-8">

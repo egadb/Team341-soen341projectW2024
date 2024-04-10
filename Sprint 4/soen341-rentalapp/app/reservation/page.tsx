@@ -186,7 +186,7 @@ export default function ReservationForm() {
           Pickup Date
           <input
             type="date"
-            className="rounded-md border-2 p-3 text-gray-400 bg-white bg-slate-300"
+            className="rounded-md border-2 p-3 text-gray-400 bg-slate-300"
             name="pickupDate"
             placeholder="Pickup Date"
             required
