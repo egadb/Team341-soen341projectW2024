@@ -4,7 +4,6 @@ import Login from "@/lib/actions/login";
 import { getUserSession } from "@/lib/session";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-
 export default async function LoginForm() {
   const user = await getUserSession();
   if (user) redirect("/");
