@@ -1,7 +1,10 @@
 import Provider from "@/components/form/Provider";
 import { getAgreement } from "@/lib/actions/reservationActions";
+import { getUserSession } from "@/lib/session";
 
-const Form = () => {
+const Form = async () => {
+  const session: any = await getUserSession();
+  if (!session) return <div className="flex h-screen text-red-500 font-bold">Session Expired! Please Log In</div>
   return (
     <div className="flex h-screen items-center justify-center bg-sky-100 p-8">
       <div className="flex flex-col gap-4 rounded-lg border-t-4 border-sky-900 bg-slate-100 p-10">
@@ -16,29 +19,29 @@ const Form = () => {
             </p>
           </div>
           <input
-            className="rounded-lg p-3 shadow-inner"
+            className="border-2 rounded-lg p-3 shadow-inner bg-white"
             type="text"
             id="bookingNumber"
             name="bookingNumber"
             placeholder="Enter your Booking Number"
           />
           <input
-            className="rounded-lg p-3 shadow-inner"
+            className="border-2 rounded-lg p-3 shadow-inner bg-white"
             type="text"
             id="driversLicense"
             name="Driver’s License"
             placeholder="Enter your Driver’s License"
           />
           <input
-            className="rounded-lg p-3 shadow-inner"
+            className="border-2 rounded-lg p-3 shadow-inner bg-white"
             type="text"
             id="creditCardNumber"
             name="Credit Card Number"
             placeholder="Enter your Credit Card Number *"
           />
 
-          <div className="flex flex-wrap">
-            <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4">
+          <div className="flex flex-wrap ">
+            <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4 ">
               <input
                 type="checkbox"
                 name="carInspection"

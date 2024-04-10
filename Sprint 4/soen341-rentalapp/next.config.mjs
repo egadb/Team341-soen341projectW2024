@@ -4,6 +4,10 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "purepng.com",
+        hostname: "p7.hiclipart.com",
+        hostname: "pngimg.com",
+        hostname: "www.pngall.com",
         hostname: "www.motortrend.com",
       },
     ],

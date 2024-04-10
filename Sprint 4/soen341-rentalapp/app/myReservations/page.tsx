@@ -6,7 +6,7 @@ import { getUserSession } from "@/lib/session";
 
 export default async function myReservations() {
   const session: any = await getUserSession();
-  if (!session) return <div className="flex h-screen text-red-500 font-bold">Session Expired! Please Log In</div>;
+  if (!session) return <div className="flex h-screen text-red-500 font-bold">Session Expired! Please Log In</div>
   const userReservations = await getUserReservations(session.user.email);
   return (
     <div className="flex h-screen w-full flex-col rounded-lg px-12 py-4">

@@ -7,42 +7,42 @@ import { Suspense } from "react";
 export default function RegisterForm() {
   return (
     <div className="grid h-screen place-items-center bg-sky-100">
-      <div className="absolute right-0 top-0 h-full rounded-lg border-t-4 border-sky-900 bg-slate-100 p-5 shadow-lg">
-        <h1 className="my-4 px-4 py-20 text-4xl font-bold">Register</h1>
+      <div className="w-max h-max m-auto rounded-lg border-t-8 border-sky-900 bg-slate-100 p-5 shadow-xl">
+        <h1 className="my-4 px-4 py-12 text-4xl font-bold">Register</h1>
         <Suspense>
           <Provider formAction={registerUser}>
             <Spinner />
             <input
               type="text"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"firstName"}
               placeholder=" First Name"
               required
             />
             <input
               type="text"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"lastName"}
               placeholder=" Last Name"
               required
             />
             <input
               type="text"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"email"}
               placeholder=" Email"
               required
             />
             <input
               type="password"
-              className="h-12 w-full rounded-full border-2 px-4 py-8"
+              className="h-12 w-full rounded-full border-2 px-4 py-8 bg-white"
               name={"password"}
               placeholder=" Password"
               required
             />
             <button
               type="submit"
-              className="cursor-pointer rounded-full bg-sky-900 px-6 py-3 font-bold text-white"
+              className="cursor-pointer rounded-full bg-sky-900 px-6 py-3 font-bold text-white hover:bg-sky-700"
             >
               Register
             </button>

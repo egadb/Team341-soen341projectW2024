@@ -3,6 +3,7 @@
 import Provider from "@/components/form/Provider";
 import Spinner from "@/components/form/Spinner";
 import PostalCodeForm from "@/components/reservation/PostalCodeForm";
+import { getUserSession } from "@/lib/session";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 
@@ -16,6 +17,7 @@ import { ChangeEvent, useState } from "react";
 // console.log(response);
 
 export default function ReservationForm() {
+  
   const [location, setLocation] = useState("");
   const [pickupDate, setPickupDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
@@ -146,7 +148,7 @@ export default function ReservationForm() {
       `/reservationPage?location=${location}&type=${typeVehicle}&category=${category}&priceRange=${priceRange}&pickupDate=${pickupDate}&returnDate=${returnDate}&additionalFeatures=${additionalFeatures}`
     );
   };
-
+  
   return (
     <div className="grid h-screen place-items-center bg-sky-100">
       <div className="rounded-lg border-t-4 border-sky-900 bg-slate-100 p-5 shadow-lg">
@@ -169,7 +171,7 @@ export default function ReservationForm() {
           </button> */}
           <select
             id="locationDropdown"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-white"
             name={"location"}
             required
             onChange={handleChange}
@@ -184,7 +186,7 @@ export default function ReservationForm() {
           Pickup Date
           <input
             type="date"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-slate-300"
             name="pickupDate"
             placeholder="Pickup Date"
             required
@@ -193,7 +195,7 @@ export default function ReservationForm() {
           Return Date
           <input
             type="date"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-slate-300"
             name="returnDate"
             placeholder="Return Date"
             required
@@ -201,7 +203,7 @@ export default function ReservationForm() {
           />
           <select
             id="typeDropdown"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-white"
             name={"typeVehicle"}
             required
             onChange={handleChange}
@@ -216,7 +218,7 @@ export default function ReservationForm() {
           </select>
           <select
             id="categoryDropdown"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-white"
             name={"category"}
             required
             onChange={handleChange}
@@ -230,7 +232,7 @@ export default function ReservationForm() {
           </select>
           <select
             id="priceDropdown"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-white"
             name={"priceRange"}
             required
             onChange={handleChange}
@@ -243,48 +245,6 @@ export default function ReservationForm() {
             <option value="81-120">81$ to 120$</option>
             <option value="121-and-more">121$ and More</option>
           </select>
-          {/* <div className="flex flex-wrap"> */}
-            {/* <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4">
-              <input
-                type="checkbox"
-                name="sunroof"
-                value="Sunroof"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              <span className="mr-2">Sunroof</span>
-            </label>
-            <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4">
-              <input
-                type="checkbox"
-                name="leatherSeats"
-                value="Leather Seats"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              <span className="mr-2">Leather Seats</span>
-            </label>
-            <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4">
-              <input
-                type="checkbox"
-                name="heatedSeats"
-                value="Heated Seats"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              <span className="mr-2">Heated Seats</span>
-            </label>
-            <label className="flex w-full items-center sm:w-1/2 md:w-1/3 lg:w-1/4">
-              <input
-                type="checkbox"
-                name="backupCamera"
-                value="Backup Camera"
-                className="mr-2"
-                onChange={handleCheckboxChange}
-              />
-              <span className="mr-2">Backup Camera</span>
-            </label> */}
-          {/* </div> */}
           <button
             type="submit"
             className="cursor-pointer rounded-lg bg-sky-900 px-6 py-2 font-bold text-white hover:bg-sky-950"

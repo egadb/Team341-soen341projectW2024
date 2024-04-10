@@ -79,21 +79,21 @@ export default async function ProvidePaymentInfo({
 
           <input
             type="text"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-white"
             name="cardNumber"
             placeholder="Card Number"
             required
           />
           <input
             type="text"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-white"
             name="expiryDate"
             placeholder="Expiration Date"
             required
           />
           <input
             type="text"
-            className="rounded-md border-2 p-3 text-gray-400"
+            className="rounded-md border-2 p-3 text-gray-400 bg-white"
             name="cvv"
             placeholder="CVV"
             required
