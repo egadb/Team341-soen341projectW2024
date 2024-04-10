@@ -35,15 +35,15 @@ jobs:
           run_install: true
 
       - name: Install dependencies
-        working-directory: ./Sprint 2/soen341-rentalapp
+        working-directory: ./Sprint 4/soen341-rentalapp
         run: pnpm install
 
       - name: Build Next.js app
-        working-directory: ./Sprint 2/soen341-rentalapp
+        working-directory: ./Sprint 4/soen341-rentalapp
         run: pnpm run build
 
       - name: Run tests
-        working-directory: ./Sprint 2/soen341-rentalapp
+        working-directory: ./Sprint 4/soen341-rentalapp
         run: pnpm run test
 
       - name: Install Vercel CLI
