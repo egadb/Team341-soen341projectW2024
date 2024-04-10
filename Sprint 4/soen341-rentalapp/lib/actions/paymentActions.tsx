@@ -29,7 +29,7 @@ export async function handlePayment(prevState: any, formData: FormData) {
   );
 
   if (!isValidCardNumber || !isValidExpiryDate || !isValidCVV) {
-    return alert("Invalid payment information");
+    return { error: "Please check your payment information and try again." };
   }
   createReservationUser(null, formData);
   redirect("/");
